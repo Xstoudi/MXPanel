@@ -17,7 +17,7 @@ sqlServer.connect(function (err) {
     if (Logger_1["default"].err(err)) {
         gracefulExit();
     }
-    Logger_1["default"].log("Contected to database \"" + Configuration_1["default"].getSqlDatabase() + "\" on " + Configuration_1["default"].getSqlHost());
+    Logger_1["default"].log("Connected to database \"" + Configuration_1["default"].getSqlDatabase() + "\" on " + Configuration_1["default"].getSqlHost());
     appMain();
 });
 function appMain() {

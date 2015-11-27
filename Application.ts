@@ -21,7 +21,7 @@ sqlServer.connect((err) => {
 	if(Logger.err(err)){
 		gracefulExit();
 	}
-	Logger.log(`Contected to database "${Configuration.getSqlDatabase()}" on ${Configuration.getSqlHost()}`);
+	Logger.log(`Connected to database "${Configuration.getSqlDatabase()}" on ${Configuration.getSqlHost()}`);
 	appMain();
 });
 
