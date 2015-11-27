@@ -1,0 +1,6 @@
+{
+	"sqlHost": "localhost",
+	"sqlUser": "root",
+	"sqlPass": "",
+	"sqlDatabase": "hermes"
+}
