@@ -2,7 +2,7 @@
   "name": "mxpanel",
   "version": "1.0.0",
   "description": "",
-  "main": "Application.js",
+  "main": "Application/Server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
