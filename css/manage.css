@@ -66,8 +66,13 @@ nav ul li a:visited{
     box-shadow: 3px 3px 3px #ccc;
 }
 
+#manage-btn-control .input-group{
+    margin: 10px 0;
+}
+
 #manage-btn-control {
     margin: 20px 50px 10px auto;
+    max-width: 600px;
     background: #F9F6FF;
     padding: 5px 10px;
     width: 40%;
@@ -83,4 +88,35 @@ nav ul li a:visited{
     margin: 10px 0 0 auto;
     display: block;
     width: 70px;
+}
+
+#user-list{
+    display: block;
+    background: #F9F6FF;
+    box-shadow: 3px 3px 3px 2px #ccc;
+    padding: 5px 10px;
+    padding-bottom: 20px;
+    border-radius: 5px;
+    width: 50%;
+    margin: 20px 5% 0 5%;
+    float: left;
+}
+
+#user-list h2{
+    font-size: 150%;
+}
+
+#user-list ul{
+    padding: 0;
+    list-style: none;
+}
+
+#user-list ul li .btn-danger{
+    border-radius: 100px;
+}
+
+#user-list .active{
+    background: #dedede;
+    border-color: #dedede;
+    color: #000;
 }

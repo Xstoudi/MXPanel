@@ -32,18 +32,52 @@
             </nav>
         </header>
 
+        <div id="user-list" class="list-group">
+            <h2>Users List</h2>
+            <a href="#" class="list-group-item active">
+               Cras justo odio
+             </a>
+             <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+             <a href="#" class="list-group-item">Morbi leo risus</a>
+             <a href="#" class="list-group-item">Porta ac consectetur ac</a>
+             <a href="#" class="list-group-item">Vestibulum at eros</a>
+        </div>
+
         <div id="manage-btn-control">
             <h2>Add an user</h2>
             <div class="input-group" id="new-user-input">
                 <input type="text" class="form-control" placeholder="Username">
-                <span class="input-group-addon">@idleweiss.ch</span>
+                <div class="btn-group" id="domain-selection">
+                  <button type="button" class="btn" id="domain-selection-button">Domaine</button>
+                  <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="caret"></span>
+                    <span class="sr-only">Toggle Dropdown</span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">idleweiss.ch</a></li>
+                    <li><a href="#">divtec.ch</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">pcsoft.fr</a></li>
+                  </ul>
+                </div>
+            </div>
+            <div class="input-group" id="password">
+                <input type="password" class="form-control" placeholder="Password">
+                <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+            </div>
+            <div class="input-group" id="password-repeat">
+                <input type="password" class="form-control" placeholder="Repeat Password">
+                <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
             </div>
             <button class="btn btn-success">Add</button>
         </div>
-        <button class="btn btn-danger"> - </button>
+
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="vendors\jquery.js"></script>
+        <script src="../vendors/jquery.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="vendors\bootstrap-3.3.5-dist\bootstrap-3.3.5-dist\js\bootstrap.min.js"></script>
+        <script src="../vendors\bootstrap-3.3.5-dist\bootstrap-3.3.5-dist\js\bootstrap.min.js"></script>
+
+        <!--Mon JS -->
+        <script src="../js/manage.js"></script>
     </body>
 </html>
