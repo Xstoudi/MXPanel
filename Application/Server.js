@@ -6,6 +6,7 @@ var cookieParser = require("cookie-parser");
 var session = require("express-session");
 var Logger_1 = require("./Logger");
 var Configuration_1 = require("./Configuration");
+var Routing_1 = require("./Routing");
 Configuration_1["default"].loadConfiguration();
 var sqlServer = mysql.createConnection({
     host: Configuration_1["default"].getSqlHost(),
@@ -35,6 +36,8 @@ function appMain() {
     httpServer.use(bodyParser.json());
     httpServer.use(bodyParser.urlencoded({ extended: true }));
     // Routes
+    httpServer.get("/", Routing_1["default"].Home.get);
+    httpServer.listen(3000);
 }
 function gracefulExit() {
     sqlServer.end();

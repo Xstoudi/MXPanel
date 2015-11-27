@@ -6,3 +6,4 @@
 /// <reference path="./body-parser/body-parser.d.ts" />
 /// <reference path="./cookie-parser/cookie-parser.d.ts" />
 /// <reference path="./express-session/express-session.d.ts" />
+/// <reference path="./angularjs/angular.d.ts" />

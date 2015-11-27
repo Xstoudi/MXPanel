@@ -7,6 +7,7 @@ import * as session from "express-session";
 
 import Logger from "./Logger";
 import Configuration from "./Configuration";
+import Routing from "./Routing";
 
 Configuration.loadConfiguration();
 
@@ -43,8 +44,9 @@ function appMain(){
 	httpServer.use(bodyParser.urlencoded({extended: true}));
 	
 	// Routes
+	httpServer.get("/", Routing.Home.get);
 	
-	
+	httpServer.listen(3000);
 }
 
 function gracefulExit(){
