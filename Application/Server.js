@@ -4,8 +4,8 @@ var path = require("path");
 var bodyParser = require("body-parser");
 var cookieParser = require("cookie-parser");
 var session = require("express-session");
-var Logger_1 = require("./classes/Logger");
-var Configuration_1 = require("./classes/Configuration");
+var Logger_1 = require("./Logger");
+var Configuration_1 = require("./Configuration");
 Configuration_1["default"].loadConfiguration();
 var sqlServer = mysql.createConnection({
     host: Configuration_1["default"].getSqlHost(),
