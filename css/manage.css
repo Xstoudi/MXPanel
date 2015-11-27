@@ -78,6 +78,17 @@ nav ul li a:visited{
     width: 40%;
     border-radius: 5px;
     box-shadow: 3px 3px 3px 2px #ccc;
+    vertical-align: middle;
+}
+
+#manage-btn-control #new-user-input{
+    width: 100%;
+}
+
+#manage-btn-control input[type="text"]{
+    width: 70%;
+    display: block;
+    float: left;
 }
 
 #manage-btn-control h2{
@@ -90,7 +101,21 @@ nav ul li a:visited{
     width: 70px;
 }
 
+#manage-btn-control #domain-selection{
+    float: right;
+    vertical-align: middle;
+}
+#manage-btn-control #domain-selection-button{
+    vertical-align: middle;
+    margin: 0;
+}
+#manage-btn-control .dropdown-toggle{
+    vertical-align: middle;
+    margin: 0;
+}
+
 #user-list{
+    overflow: auto;
     display: block;
     background: #F9F6FF;
     box-shadow: 3px 3px 3px 2px #ccc;
@@ -98,25 +123,26 @@ nav ul li a:visited{
     padding-bottom: 20px;
     border-radius: 5px;
     width: 50%;
-    margin: 20px 5% 0 5%;
+    margin: 20px auto 0 5%;
     float: left;
+    vertical-align: middle;
 }
 
 #user-list h2{
     font-size: 150%;
 }
 
-#user-list ul{
-    padding: 0;
-    list-style: none;
+#user-list a{
+    width: 90%;
 }
 
-#user-list ul li .btn-danger{
-    border-radius: 100px;
+#user-list .list-group-item span{
+    display: block;
+    width: 90%;
+    float: left;
 }
 
-#user-list .active{
-    background: #dedede;
-    border-color: #dedede;
-    color: #000;
+#user-list .list-group-item button{
+    display: block;
+    margin: 0 0 0 auto;
 }
