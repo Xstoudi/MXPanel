@@ -5,8 +5,8 @@ import * as bodyParser from "body-parser";
 import * as cookieParser from "cookie-parser";
 import * as session from "express-session";
 
-import Logger from "./classes/Logger";
-import Configuration from "./classes/Configuration";
+import Logger from "./Logger";
+import Configuration from "./Configuration";
 
 Configuration.loadConfiguration();
 
