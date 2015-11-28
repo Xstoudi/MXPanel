@@ -37,7 +37,9 @@ function appMain() {
     httpServer.use(bodyParser.urlencoded({ extended: true }));
     // Routes
     httpServer.get("/", Routing_1["default"].Home.get);
-    httpServer.listen(3000);
+    httpServer.listen(Configuration_1["default"].getHttpPort(), function () {
+        Logger_1["default"].log("Listen for HTTP requests on " + Configuration_1["default"].getHttpPort());
+    });
 }
 function gracefulExit() {
     sqlServer.end();

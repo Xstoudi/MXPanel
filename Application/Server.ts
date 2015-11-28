@@ -46,7 +46,9 @@ function appMain(){
 	// Routes
 	httpServer.get("/", Routing.Home.get);
 	
-	httpServer.listen(3000);
+	httpServer.listen(Configuration.getHttpPort(), () => {
+		Logger.log(`Listen for HTTP requests on ${Configuration.getHttpPort()}`)
+	});
 }
 
 function gracefulExit(){

@@ -9,7 +9,8 @@ var Configuration;
         sqlHost: "localhost",
         sqlUser: "root",
         sqlPass: "",
-        sqlDatabase: "hermes"
+        sqlDatabase: "hermes",
+        httpPort: 3000
     };
     var config = undefined;
     function loadConfiguration() {
@@ -56,6 +57,10 @@ var Configuration;
         return config.sqlDatabase;
     }
     Configuration.getSqlDatabase = getSqlDatabase;
+    function getHttpPort() {
+        return config.httpPort;
+    }
+    Configuration.getHttpPort = getHttpPort;
 })(Configuration || (Configuration = {}));
 exports.__esModule = true;
 exports["default"] = Configuration;

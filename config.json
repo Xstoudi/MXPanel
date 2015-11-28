@@ -2,5 +2,6 @@
 	"sqlHost": "localhost",
 	"sqlUser": "root",
 	"sqlPass": "",
-	"sqlDatabase": "hermes"
+	"sqlDatabase": "hermes",
+	"httpPort": 3000
 }

@@ -14,14 +14,16 @@ namespace Configuration{
 		sqlHost: string,
 		sqlUser: string,
 		sqlPass: string,
-		sqlDatabase: string
+		sqlDatabase: string,
+		httpPort: number
 	}
 	
 	let defaultConfig: IConfiguration = {
 		sqlHost: "localhost",
 		sqlUser: "root",
 		sqlPass: "",
-		sqlDatabase: "hermes"
+		sqlDatabase: "hermes",
+		httpPort: 3000
 	}
 
 	let config: IConfiguration = undefined;
@@ -68,6 +70,9 @@ namespace Configuration{
 	}
 	export function getSqlDatabase(){
 		return config.sqlDatabase;
+	}
+	export function getHttpPort(){
+		return config.httpPort;
 	}
 }
 export default Configuration;
