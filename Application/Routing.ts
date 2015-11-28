@@ -6,6 +6,11 @@ import Configuration from "./Configuration";
 export namespace Routing{
 	export namespace Home{
 		export function get(req: express.Request, res: express.Response){
+			res.render("index");
+		}
+	}
+	export namespace Login{
+		export function get(req: express.Request, res: express.Response){
 			res.render("partials/login");
 		}
 	}

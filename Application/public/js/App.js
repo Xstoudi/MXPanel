@@ -1,8 +1,8 @@
 var ngApp = angular.module("mxpanel", ["ngRoute"]);
 ngApp.config(function ($routeProvider) {
     $routeProvider
-        .when("/", {
-        templateUrl: "/"
+        .when("/login", {
+        templateUrl: "/login"
     })
-        .otherwise("/");
+        .otherwise("/login");
 });
