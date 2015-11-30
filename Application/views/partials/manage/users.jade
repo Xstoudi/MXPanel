@@ -15,15 +15,10 @@ div(ng-controller="usersController")
         h2 Users List
         - for(var i = 0; i < users.length; ++i){
             div(class="list-group-item")
-                span(href="#")= users[i]
+                span(href="#")= users[i].email
                 button(class="btn btn-danger")
                     i(class="fa fa-trash")
         -}
-        
-        div(class="list-group-item")
-            span(href="#") Xavier
-            button(class="btn btn-danger")
-                i(class="fa fa-trash")
     div(id="manage-btn-control")
         h2 Add an user
         div(class="input-group" id="new-user-input")

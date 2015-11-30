@@ -1,5 +1,4 @@
 var express = require("express");
-var mysql = require("mysql");
 var path = require("path");
 var bodyParser = require("body-parser");
 var cookieParser = require("cookie-parser");
@@ -7,14 +6,10 @@ var session = require("express-session");
 var Logger_1 = require("./Logger");
 var Configuration_1 = require("./Configuration");
 var Routing_1 = require("./Routing");
+var Database_1 = require("./Database");
 Configuration_1["default"].loadConfiguration();
-var sqlServer = mysql.createConnection({
-    host: Configuration_1["default"].getSqlHost(),
-    user: Configuration_1["default"].getSqlUser(),
-    password: Configuration_1["default"].getSqlPass(),
-    database: Configuration_1["default"].getSqlDatabase()
-});
-sqlServer.connect(function (err) {
+Database_1["default"].loadDatabaseInfo();
+Database_1["default"].sqlServer.connect(function (err) {
     if (Logger_1["default"].err(err)) {
         gracefulExit();
     }
@@ -49,7 +44,7 @@ function appMain() {
     });
 }
 function gracefulExit() {
-    sqlServer.end();
+    Database_1["default"].sqlServer.end();
     Logger_1["default"].log('Database connection closed through app termination...');
     process.exit(0);
 }

@@ -1,5 +1,4 @@
 import * as express from "express";
-import * as mysql from "mysql";
 import * as path from "path";
 import * as bodyParser from "body-parser";
 import * as cookieParser from "cookie-parser";
@@ -8,17 +7,13 @@ import * as session from "express-session";
 import Logger from "./Logger";
 import Configuration from "./Configuration";
 import Routing from "./Routing";
+import Database from "./Database";
 
 Configuration.loadConfiguration();
 
-let sqlServer = mysql.createConnection({
-	host:     Configuration.getSqlHost(),
-	user:     Configuration.getSqlUser(),
-	password: Configuration.getSqlPass(),
-	database: Configuration.getSqlDatabase()
-});
+Database.loadDatabaseInfo();
 
-sqlServer.connect((err) => {
+Database.sqlServer.connect((err) => {
 	if(Logger.err(err)){
 		gracefulExit();
 	}
@@ -64,7 +59,7 @@ function appMain(){
 }
 
 function gracefulExit(){
-	sqlServer.end();
+	Database.sqlServer.end();
 	Logger.log('Database connection closed through app termination...');
 	
 	process.exit(0);

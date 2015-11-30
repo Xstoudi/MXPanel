@@ -1,6 +1,7 @@
 import * as express from "express";
 
 import Logger from "./Logger";
+import Database from "./Database";
 import Configuration from "./Configuration";
 
 import * as childProcess from "child_process";
@@ -85,8 +86,10 @@ export namespace Routing{
 	export namespace Users{
 		export function get(req: express.Request, res: express.Response){
 			if((<any>req.session).logged) {
-				let users = ["Xavier", "Admin", "Yolo"];
-				res.render("partials/manage/users", {users: users})
+				Database.getUsers((users) => {
+					res.render("partials/manage/users", {users: users})
+				});
+
 			}else
 				res.render("partials/login");
 		}

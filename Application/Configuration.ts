@@ -53,11 +53,12 @@ namespace Configuration{
 	function readConfig(){
 		let configContent = undefined;
 		try {
-			configContent = fs.readFileSync(configPath, {encoding: "utf8"});		
-		} catch (err) {}
-
-		config = configContent ? JSON.parse(configContent) : defaultConfig;
-		Logger.log("Configuration loaded !")
+			configContent = fs.readFileSync(configPath, {encoding: "utf8"});
+			config = configContent ? JSON.parse(configContent) : defaultConfig;
+			Logger.log("Configuration loaded !")	
+		} catch (err) {
+			Logger.err(err);
+		}
 	}
 	
 	// Getters

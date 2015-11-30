@@ -1,4 +1,5 @@
 var Logger_1 = require("./Logger");
+var Database_1 = require("./Database");
 var Configuration_1 = require("./Configuration");
 var childProcess = require("child_process");
 var Routing;
@@ -95,8 +96,9 @@ var Routing;
     (function (Users) {
         function get(req, res) {
             if (req.session.logged) {
-                var users = ["Xavier", "Admin", "Yolo"];
-                res.render("partials/manage/users", { users: users });
+                Database_1["default"].getUsers(function (users) {
+                    res.render("partials/manage/users", { users: users });
+                });
             }
             else
                 res.render("partials/login");
