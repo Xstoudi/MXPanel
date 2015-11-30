@@ -14,18 +14,5 @@ html(lang="fr" ng-app="mxpanel")
         script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-route.js")
         script(src="vendors/bootstrap-3.3.5-dist/bootstrap-3.3.5-dist/js/bootstrap.min.js")
         script(src="js/App.js")
-    body
-        header
-            nav(class="navbar navbar-default navbar-inverse navbar-fixed-top")
-                div(class="container")
-                    ul(class="nav navbar-nav")
-                        li(class="active")
-                            a(href="#/overview") Overview
-                        li
-                            a(href="#") User management
-                        div(id="logout-button")
-                            button(class="btn btn-primary") Refresh
-                            button(class="btn btn-danger") Logout
-                    
-                            
+    body                                         
         div(ng-view)

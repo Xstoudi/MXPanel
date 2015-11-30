@@ -1,3 +1,14 @@
+header
+    nav(class="navbar navbar-default navbar-inverse navbar-fixed-top")
+        div(class="container")
+            ul(class="nav navbar-nav")
+                li(class="active")
+                    a(href="#/overview") Overview
+                li
+                    a(href="#") User management
+                div(id="logout-button")
+                    button(class="btn btn-primary") Refresh
+                    button(class="btn btn-danger") Logout
 div(ng-controller="overviewController")
     div(class="manage-menu overview-container")
         h2 Postfix
