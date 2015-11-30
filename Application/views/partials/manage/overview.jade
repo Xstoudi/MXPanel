@@ -1,21 +1,21 @@
-div
-    div(id="overview-container" class="manage-menu")
+div(ng-controller="overviewController")
+    div(class="manage-menu overview-container")
         h2 Postfix
         hr
-        div(id="serveur-status")
+        div(id="server-status-postfix")
             span Server Status
-            span(id="status") &nbsp;OK
+            span(id="status-postfix") &nbsp;OK
         div(id="option-selection" class="btn-group-lg")
             button(class="btn btn-success") Start
             button(class="btn btn-warning") Reboot
             button(class="btn btn-danger") Stop
             
-    div(id="overview-container" class="manage-menu")
+    div(class="manage-menu overview-container")
         h2 Dovecot
         hr
-        div(id="serveur-status")
+        div(id="server-status-dovecot")
             span Server Status
-            span(id="status") &nbsp;OK
+            span(id="status-dovecot") &nbsp;OK
         div(id="option-selection" class="btn-group-lg")
             button(class="btn btn-success") Start
             button(class="btn btn-warning") Reboot

@@ -65,7 +65,7 @@ header #logout-button{
     text-align: center;
 }
 
-#overview-container{
+.overview-container{
     text-align: center;
     margin: 0 auto;
     width: 50%;
@@ -73,17 +73,18 @@ header #logout-button{
     float: left;
 }
 
-#overview-container h2{
+.overview-container h2{
     font-weight: lighter;
 }
 
-#overview-container #serveur-status {
+.overview-container #server-status-postfix, 
+.overview-container #server-status-dovecot {
     font-weight: bold;
     font-size: 150%;
     margin: 0 0 20px 0;
 }
 
-#overview-container #option-selection button{
+.overview-container #option-selection button{
     margin: 0 7px;
     box-shadow: 3px 3px 3px #ccc;
 }
