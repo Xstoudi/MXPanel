@@ -8,7 +8,8 @@ div(ng-controller="overviewController")
                     li
                         a(href="#") User management
                     div(id="logout-button")
-                        button(class="btn btn-primary" ng-click="refreshStatus();") Refresh
+                        button(class="btn btn-primary" ng-click="refreshStatus();") Refresh 
+                            i(class="fa fa-refresh fa-spin")
                         button(class="btn btn-danger" ng-click="logout();") Logout
     div(class="manage-menu overview-container")
         h2 Postfix
