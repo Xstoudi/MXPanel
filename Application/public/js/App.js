@@ -7,6 +7,9 @@ ngApp.config(function ($routeProvider) {
         .when("/overview", {
         templateUrl: "/overview"
     })
+        .when("/users", {
+        templateUrl: "/users"
+    })
         .otherwise("/login");
 })
     .controller("loginController", function ($scope, $location, $window) {
@@ -113,4 +116,21 @@ ngApp.config(function ($routeProvider) {
         });
     };
     $scope.refreshStatus();
+})
+    .controller("usersController", function ($scope) {
+    var links = $("#manage-btn-control #new-user-input #domain-selection .dropdown-menu a");
+    links.each(function (i, link) {
+        var linkBis = $(link);
+        linkBis.on("click", function () {
+            $("#domain-selection-button").html(linkBis.html());
+        });
+    });
+    var addButton = $("#manage-btn-control .btn-success");
+    addButton.on("click", function (e) {
+        if ($("#password input").val() != $("#password-repeat input").val()) {
+            alert("Les mots de passe doivent correspondre !");
+        }
+        else {
+        }
+    });
 });
