@@ -7,6 +7,9 @@ ngApp.config(($routeProvider) => {
 		.when("/overview", {
 			templateUrl: "/overview"
 		})
+		.when("/users", {
+			templateUrl: "/users"
+		})
 		.otherwise("/login");
 })
 .controller("loginController", ($scope, $location, $window) => {
@@ -115,4 +118,22 @@ ngApp.config(($routeProvider) => {
 	}
 	
 	$scope.refreshStatus();
+})
+.controller("usersController", ($scope) => {
+	let links = $("#manage-btn-control #new-user-input #domain-selection .dropdown-menu a");
+    links.each((i, link) => {
+        let linkBis = $(link);
+        linkBis.on("click", function(){
+            $("#domain-selection-button").html(linkBis.html())
+        });
+    });
+
+    let addButton = $("#manage-btn-control .btn-success");
+    addButton.on("click", (e) => {
+        if($("#password input").val() != $("#password-repeat input").val()){
+            alert("Les mots de passe doivent correspondre !");
+        } else {
+            //fait ce que tu veux :D
+        }
+    });
 })

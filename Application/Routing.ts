@@ -62,22 +62,34 @@ export namespace Routing{
 					case "start":
 						childProcess.exec(`service ${req.params.server} start`, (err, stdout, stderr) => {
 							res.status(200).send({state: "done"});
+							Logger.log(`${req.ip} started ${req.params.server}...`);
 						});
 						break;
 					case "reboot":
 						childProcess.exec(`service ${req.params.server} restart`, (err, stdout, stderr) => {
 							res.status(200).send({state: "done"});
+							Logger.log(`${req.ip} rebooted ${req.params.server}...`);
 						});
 						break;
 					case "stop":
 						childProcess.exec(`service ${req.params.server} stop`, (err, stdout, stderr) => {
 							res.status(200).send({state: "done"});
+							Logger.log(`${req.ip} stopped ${req.params.server}...`);
 						});
 						break;
 				}
 			}else
 				res.status(403).send({please: "go hell"});
 		}	
+	}
+	export namespace Users{
+		export function get(req: express.Request, res: express.Response){
+			if((<any>req.session).logged) {
+				let users = ["Xavier", "Admin", "Yolo"];
+				res.render("partials/manage/users", {users: users})
+			}else
+				res.render("partials/login");
+		}
 	}
 }
 export default Routing;

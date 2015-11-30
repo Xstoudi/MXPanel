@@ -69,16 +69,19 @@ var Routing;
                     case "start":
                         childProcess.exec("service " + req.params.server + " start", function (err, stdout, stderr) {
                             res.status(200).send({ state: "done" });
+                            Logger_1["default"].log(req.ip + " started " + req.params.server + "...");
                         });
                         break;
                     case "reboot":
                         childProcess.exec("service " + req.params.server + " restart", function (err, stdout, stderr) {
                             res.status(200).send({ state: "done" });
+                            Logger_1["default"].log(req.ip + " rebooted " + req.params.server + "...");
                         });
                         break;
                     case "stop":
                         childProcess.exec("service " + req.params.server + " stop", function (err, stdout, stderr) {
                             res.status(200).send({ state: "done" });
+                            Logger_1["default"].log(req.ip + " stopped " + req.params.server + "...");
                         });
                         break;
                 }
@@ -88,6 +91,18 @@ var Routing;
         }
         Server.post = post;
     })(Server = Routing.Server || (Routing.Server = {}));
+    var Users;
+    (function (Users) {
+        function get(req, res) {
+            if (req.session.logged) {
+                var users = ["Xavier", "Admin", "Yolo"];
+                res.render("partials/manage/users", { users: users });
+            }
+            else
+                res.render("partials/login");
+        }
+        Users.get = get;
+    })(Users = Routing.Users || (Routing.Users = {}));
 })(Routing = exports.Routing || (exports.Routing = {}));
 exports.__esModule = true;
 exports["default"] = Routing;
