@@ -36,37 +36,27 @@ input[type="submit"]{
 body{
     height: 100%;
     overflow: auto;
+    padding-top: 150px;
+}
+
+header li{
+    font-size: 150%;
+    vertical-align: middle;
+    display: inline-block;
+    overflow: auto;
 }
 
 header{
-    background: #2B2B2B;
-    border-bottom: 5px solid #851307;
-    padding: 20px 0;
-    margin-bottom: 50px;
+    overflow: auto;
 }
 
-nav ul {
-    text-align: center;
-    margin: 0;
-}
-
-nav ul li{
-    display: inline;
-    vertical-align: bottom;
-    padding: 0 5px;
-    margin: 0;
-}
-
-nav ul li a{
-    color: #fff;
-    width: 100%;
-    font-size: 175%;
-}
-
-nav ul li a:hover,
-nav ul li a:visited{
-    color: #FF250D;
-    text-decoration: none;
+header #logout-button{
+    position: absolute;
+    right: 15px;
+    display: block;
+    float: right;
+    top: 5px;
+    text-align: right;
 }
 
 .manage-menu{
