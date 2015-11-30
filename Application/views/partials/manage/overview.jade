@@ -15,7 +15,7 @@ div(ng-controller="overviewController")
         h2 Postfix
         hr
         div(id="server-status-postfix")
-            span Server Status
+            span Server Status : 
             span(id="status-postfix")
         div(id="option-selection" class="btn-group-lg")
             button(class="btn btn-success" ng-click="sendCommand('start', 'postfix');") Start
@@ -26,7 +26,7 @@ div(ng-controller="overviewController")
         h2 Dovecot
         hr
         div(id="server-status-dovecot")
-            span Server Status
+            span Server Status : 
             span(id="status-dovecot")
         div(id="option-selection" class="btn-group-lg")
             button(class="btn btn-success" ng-click="sendCommand('start', 'dovecot');") Start
