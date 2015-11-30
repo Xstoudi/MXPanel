@@ -59,6 +59,10 @@ header #logout-button{
     text-align: right;
 }
 
+header .btn-primary{
+    margin-right: 10px;
+}
+
 .manage-menu{
     display: block;
     float: left;
