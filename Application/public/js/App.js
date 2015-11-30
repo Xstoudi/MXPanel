@@ -60,6 +60,8 @@ ngApp.config(function ($routeProvider) {
         });
     };
     $scope.refreshStatus = function () {
+        var refreshing = [true, true];
+        document.querySelector("#refreshSpin").className += " fa-spin";
         // Postfix
         $.ajax({
             type: "get",
@@ -70,6 +72,8 @@ ngApp.config(function ($routeProvider) {
             },
             success: function (data, textStatus, jqXHR) {
                 document.querySelector("#status-postfix").innerHTML = " " + (data.status == "ok" ? "OK" : "DOWN");
+                refreshing[0] = false;
+                setTimeout(update, 950);
             }
         });
         // Dovecot
@@ -82,8 +86,18 @@ ngApp.config(function ($routeProvider) {
             },
             success: function (data, textStatus, jqXHR) {
                 document.querySelector("#status-dovecot").innerHTML = " " + (data.status == "ok" ? "OK" : "DOWN");
+                refreshing[1] = false;
+                setTimeout(update, 950);
             }
         });
+        function update() {
+            if (!refreshing[0] && !refreshing[1]) {
+                document.querySelector("#refreshSpin").className = document.querySelector("#refreshSpin").className.split("fa-spin").join("");
+            }
+            else {
+                setInterval(update, 950);
+            }
+        }
     };
     $scope.sendCommand = function (command, server) {
         $.ajax({
@@ -94,7 +108,7 @@ ngApp.config(function ($routeProvider) {
                 console.log("Error !" + textStatus);
             },
             success: function (data, textStatus, jqXHR) {
-                alert("OK " + data);
+                $scope.refreshStatus();
             }
         });
     };

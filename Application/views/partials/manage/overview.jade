@@ -9,7 +9,7 @@ div(ng-controller="overviewController")
                         a(href="#") User management
                     div(id="logout-button")
                         button(class="btn btn-primary" ng-click="refreshStatus();") Refresh 
-                            i(class="fa fa-refresh fa-spin")
+                            i(id="refreshSpin" class="fa fa-refresh")
                         button(class="btn btn-danger" ng-click="logout();") Logout
     div(class="manage-menu overview-container")
         h2 Postfix

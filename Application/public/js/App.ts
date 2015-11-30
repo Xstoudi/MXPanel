@@ -60,6 +60,8 @@ ngApp.config(($routeProvider) => {
 	}
 	
 	$scope.refreshStatus = () => {
+		let refreshing = [true, true];
+		document.querySelector("#refreshSpin").className += " fa-spin";
 		// Postfix
 		$.ajax({
 			type: "get",
@@ -70,6 +72,8 @@ ngApp.config(($routeProvider) => {
 			},
 			success: (data: any, textStatus: string, jqXHR: JQueryXHR) => {
 				(<HTMLElement>document.querySelector("#status-postfix")).innerHTML = " " + (data.status == "ok" ? "OK" : "DOWN");
+				refreshing[0] = false;
+				setTimeout(update, 950);
 			}
 		});
 		
@@ -83,8 +87,17 @@ ngApp.config(($routeProvider) => {
 			},
 			success: (data: any, textStatus: string, jqXHR: JQueryXHR) => {
 				(<HTMLElement>document.querySelector("#status-dovecot")).innerHTML = " " + (data.status == "ok" ? "OK" : "DOWN");
+				refreshing[1] = false;
+				setTimeout(update, 950);
 			}
 		});
+		function update(){
+			if(!refreshing[0] && !refreshing[1]){
+				document.querySelector("#refreshSpin").className = document.querySelector("#refreshSpin").className.split("fa-spin").join("");
+			}else{
+				setInterval(update, 950);
+			}
+		}
 	}
 	
 	$scope.sendCommand = (command: string, server: string) => {
@@ -96,7 +109,7 @@ ngApp.config(($routeProvider) => {
 				console.log("Error !" + textStatus);
 			},
 			success: (data: any, textStatus: string, jqXHR: JQueryXHR) => {
-				alert("OK " + data);
+				$scope.refreshStatus();
 			}
 		});
 	}
