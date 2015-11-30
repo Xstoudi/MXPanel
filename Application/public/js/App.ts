@@ -40,9 +40,25 @@ ngApp.config(($routeProvider) => {
 			success: onSuccess
 		});
 	}
-	
 })
-.controller("overviewController", ($scope) => {
+.controller("overviewController", ($scope, $location, $route, $templateCache) => {
+	$scope.logout = () => {
+		$.ajax({
+			type: "post",
+			url: "/logout",
+			dataType: "json",
+			error: (jqXHR: JQueryXHR, textStatus: string, errorThrown: string) => {
+				console.log("Error !" + textStatus);
+			},
+			success: (data: any, textStatus: string, jqXHR: JQueryXHR) => {
+				let currentPageTemplate = $route.current.templateUrl;
+				$templateCache.remove(currentPageTemplate);
+				$location.path("/login").replace();
+				$scope.$apply();
+			}
+		});
+	}
+	
 	$scope.refreshStatus = () => {
 		// Postfix
 		$.ajax({
@@ -53,7 +69,7 @@ ngApp.config(($routeProvider) => {
 				console.log("Error !" + textStatus);
 			},
 			success: (data: any, textStatus: string, jqXHR: JQueryXHR) => {
-				(<HTMLElement>document.querySelector("#status-postfix")).innerHTML = data.status == "ok" ? "OK" : "DOWN";
+				(<HTMLElement>document.querySelector("#status-postfix")).innerHTML = " " + (data.status == "ok" ? "OK" : "DOWN");
 			}
 		});
 		
@@ -66,8 +82,24 @@ ngApp.config(($routeProvider) => {
 				console.log("Error !" + textStatus);
 			},
 			success: (data: any, textStatus: string, jqXHR: JQueryXHR) => {
-				(<HTMLElement>document.querySelector("#status-dovecot")).innerHTML = data.status == "ok" ? "OK" : "DOWN";
+				(<HTMLElement>document.querySelector("#status-dovecot")).innerHTML = " " + (data.status == "ok" ? "OK" : "DOWN");
 			}
 		});
 	}
+	
+	$scope.sendCommand = (command: string, server: string) => {
+		$.ajax({
+			type: "post",
+			url: `/server/${server}/${command}`,
+			dataType: "json",
+			error: (jqXHR: JQueryXHR, textStatus: string, errorThrown: string) => {
+				console.log("Error !" + textStatus);
+			},
+			success: (data: any, textStatus: string, jqXHR: JQueryXHR) => {
+				alert("OK " + data);
+			}
+		});
+	}
+	
+	$scope.refreshStatus();
 })

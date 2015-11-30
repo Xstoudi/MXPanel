@@ -42,7 +42,23 @@ ngApp.config(function ($routeProvider) {
         });
     };
 })
-    .controller("overviewController", function ($scope) {
+    .controller("overviewController", function ($scope, $location, $route, $templateCache) {
+    $scope.logout = function () {
+        $.ajax({
+            type: "post",
+            url: "/logout",
+            dataType: "json",
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log("Error !" + textStatus);
+            },
+            success: function (data, textStatus, jqXHR) {
+                var currentPageTemplate = $route.current.templateUrl;
+                $templateCache.remove(currentPageTemplate);
+                $location.path("/login").replace();
+                $scope.$apply();
+            }
+        });
+    };
     $scope.refreshStatus = function () {
         // Postfix
         $.ajax({
@@ -53,7 +69,7 @@ ngApp.config(function ($routeProvider) {
                 console.log("Error !" + textStatus);
             },
             success: function (data, textStatus, jqXHR) {
-                document.querySelector("#status-postfix").innerHTML = data.status == "ok" ? "OK" : "DOWN";
+                document.querySelector("#status-postfix").innerHTML = " " + (data.status == "ok" ? "OK" : "DOWN");
             }
         });
         // Dovecot
@@ -65,8 +81,22 @@ ngApp.config(function ($routeProvider) {
                 console.log("Error !" + textStatus);
             },
             success: function (data, textStatus, jqXHR) {
-                document.querySelector("#status-dovecot").innerHTML = data.status == "ok" ? "OK" : "DOWN";
+                document.querySelector("#status-dovecot").innerHTML = " " + (data.status == "ok" ? "OK" : "DOWN");
             }
         });
     };
+    $scope.sendCommand = function (command, server) {
+        $.ajax({
+            type: "post",
+            url: "/server/" + server + "/" + command,
+            dataType: "json",
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log("Error !" + textStatus);
+            },
+            success: function (data, textStatus, jqXHR) {
+                alert("OK " + data);
+            }
+        });
+    };
+    $scope.refreshStatus();
 });

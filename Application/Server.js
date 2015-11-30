@@ -39,6 +39,7 @@ function appMain() {
     httpServer.get("/", Routing_1["default"].Home.get);
     httpServer.get("/login", Routing_1["default"].Login.get);
     httpServer.post("/login", Routing_1["default"].Login.post);
+    httpServer.post("/logout", Routing_1["default"].Logout.post);
     httpServer.get("/overview", Routing_1["default"].Overview.get);
     httpServer.get("/server/postfix", Routing_1["default"].Server.Postfix.get);
     httpServer.get("/server/dovecot", Routing_1["default"].Server.Dovecot.get);

@@ -1,21 +1,21 @@
-header
-    nav(class="navbar navbar-default navbar-inverse navbar-fixed-top")
-        div(class="container")
-            ul(class="nav navbar-nav")
-                li(class="active")
-                    a(href="#/overview") Overview
-                li
-                    a(href="#") User management
-                div(id="logout-button")
-                    button(class="btn btn-primary") Refresh
-                    button(class="btn btn-danger") Logout
 div(ng-controller="overviewController")
+    header
+        nav(class="navbar navbar-default navbar-inverse navbar-fixed-top")
+            div(class="container")
+                ul(class="nav navbar-nav")
+                    li(class="active")
+                        a(href="#/overview") Overview
+                    li
+                        a(href="#") User management
+                    div(id="logout-button")
+                        button(class="btn btn-primary" ng-click="refreshStatus();") Refresh
+                        button(class="btn btn-danger" ng-click="logout();") Logout
     div(class="manage-menu overview-container")
         h2 Postfix
         hr
         div(id="server-status-postfix")
             span Server Status
-            span(id="status-postfix") &nbsp;OK
+            span(id="status-postfix")
         div(id="option-selection" class="btn-group-lg")
             button(class="btn btn-success") Start
             button(class="btn btn-warning") Reboot
@@ -26,7 +26,7 @@ div(ng-controller="overviewController")
         hr
         div(id="server-status-dovecot")
             span Server Status
-            span(id="status-dovecot") &nbsp;OK
+            span(id="status-dovecot")
         div(id="option-selection" class="btn-group-lg")
             button(class="btn btn-success") Start
             button(class="btn btn-warning") Reboot

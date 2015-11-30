@@ -49,6 +49,8 @@ function appMain(){
 	httpServer.get("/login", Routing.Login.get);
 	httpServer.post("/login", Routing.Login.post);
 	
+	httpServer.post("/logout", Routing.Logout.post);
+	
 	httpServer.get("/overview", Routing.Overview.get);
 	
 	httpServer.get("/server/postfix", Routing.Server.Postfix.get);

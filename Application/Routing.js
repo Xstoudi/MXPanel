@@ -13,23 +13,42 @@ var Routing;
     var Login;
     (function (Login) {
         function get(req, res) {
-            res.render("partials/login");
+            if (req.session.logged)
+                res.render("partials/manage/overview");
+            else
+                res.render("partials/login");
         }
         Login.get = get;
         function post(req, res) {
             if (req.body.password === Configuration_1["default"].getPanelPassword()) {
+                var sess = req.session;
+                sess.logged = true;
                 res.status(200).send({ result: "ok" });
+                Logger_1["default"].log(req.ip + " logged on panel");
             }
             else {
                 res.status(200).send({ result: "nope" });
+                Logger_1["default"].log(req.ip + " tried to log on panel");
             }
         }
         Login.post = post;
     })(Login = Routing.Login || (Routing.Login = {}));
+    var Logout;
+    (function (Logout) {
+        function post(req, res) {
+            req.session.logged = undefined;
+            res.status(200).send({ result: "ok" });
+        }
+        Logout.post = post;
+    })(Logout = Routing.Logout || (Routing.Logout = {}));
     var Overview;
     (function (Overview) {
         function get(req, res) {
-            res.render("partials/manage/overview");
+            console.log(req.session.logged);
+            if (req.session.logged)
+                res.render("partials/manage/overview");
+            else
+                res.render("partials/login");
         }
         Overview.get = get;
     })(Overview = Routing.Overview || (Routing.Overview = {}));
@@ -39,9 +58,12 @@ var Routing;
         (function (Postfix) {
             // Get postfix status
             function get(req, res) {
-                childProcess.exec("service postfix status", function (err, stdout, stderr) {
-                    res.status(200).send({ status: stdout.toString("utf-8").indexOf("running") != -1 && !Logger_1["default"].err(err) ? "ok" : "down" });
-                });
+                if (req.session.logged)
+                    childProcess.exec("service postfix status", function (err, stdout, stderr) {
+                        res.status(200).send({ status: stdout.toString("utf-8").indexOf("running") != -1 && !Logger_1["default"].err(err) ? "ok" : "down" });
+                    });
+                else
+                    res.status(403).send({ please: "go hell" });
             }
             Postfix.get = get;
             // Post postfix command (start, reboot, stop)
@@ -53,9 +75,12 @@ var Routing;
         (function (Dovecot) {
             // Get dovecot status
             function get(req, res) {
-                childProcess.exec("service dovecot status", function (err, stdout, stderr) {
-                    res.status(200).send({ status: stdout.toString("utf-8").indexOf("running") != -1 && !Logger_1["default"].err(err) ? "ok" : "down" });
-                });
+                if (req.session.logged)
+                    childProcess.exec("service dovecot status", function (err, stdout, stderr) {
+                        res.status(200).send({ status: stdout.toString("utf-8").indexOf("running") != -1 && !Logger_1["default"].err(err) ? "ok" : "down" });
+                    });
+                else
+                    res.status(403).send({ please: "go hell" });
             }
             Dovecot.get = get;
             // Post dovecot command (start, reboot, stop)
