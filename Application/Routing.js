@@ -44,7 +44,6 @@ var Routing;
     var Overview;
     (function (Overview) {
         function get(req, res) {
-            console.log(req.session.logged);
             if (req.session.logged)
                 res.render("partials/manage/overview");
             else
@@ -54,40 +53,40 @@ var Routing;
     })(Overview = Routing.Overview || (Routing.Overview = {}));
     var Server;
     (function (Server) {
-        var Postfix;
-        (function (Postfix) {
-            // Get postfix status
-            function get(req, res) {
-                if (req.session.logged)
-                    childProcess.exec("service postfix status", function (err, stdout, stderr) {
-                        res.status(200).send({ status: stdout.toString("utf-8").indexOf("running") != -1 && !Logger_1["default"].err(err) ? "ok" : "down" });
-                    });
-                else
-                    res.status(403).send({ please: "go hell" });
+        function get(req, res) {
+            if (req.session.logged && (req.params.server == "dovecot" || req.params.server == "postfix"))
+                childProcess.exec("service " + req.params.server + " status", function (err, stdout, stderr) {
+                    res.status(200).send({ status: stdout.toString("utf-8").indexOf("running") != -1 && !Logger_1["default"].err(err) ? "ok" : "down" });
+                });
+            else
+                res.status(403).send({ please: "go hell" });
+        }
+        Server.get = get;
+        // Post command (start, reboot, stop)
+        function post(req, res) {
+            if (req.session.logged && (req.params.server == "dovecot" || req.params.server == "postfix")) {
+                switch (req.params.command) {
+                    case "start":
+                        childProcess.exec("service " + req.params.server + " start", function (err, stdout, stderr) {
+                            res.status(200).send({ state: "done" });
+                        });
+                        break;
+                    case "reboot":
+                        childProcess.exec("service " + req.params.server + " restart", function (err, stdout, stderr) {
+                            res.status(200).send({ state: "done" });
+                        });
+                        break;
+                    case "stop":
+                        childProcess.exec("service " + req.params.server + " stop", function (err, stdout, stderr) {
+                            res.status(200).send({ state: "done" });
+                        });
+                        break;
+                }
             }
-            Postfix.get = get;
-            // Post postfix command (start, reboot, stop)
-            function post(req, res) {
-            }
-            Postfix.post = post;
-        })(Postfix = Server.Postfix || (Server.Postfix = {}));
-        var Dovecot;
-        (function (Dovecot) {
-            // Get dovecot status
-            function get(req, res) {
-                if (req.session.logged)
-                    childProcess.exec("service dovecot status", function (err, stdout, stderr) {
-                        res.status(200).send({ status: stdout.toString("utf-8").indexOf("running") != -1 && !Logger_1["default"].err(err) ? "ok" : "down" });
-                    });
-                else
-                    res.status(403).send({ please: "go hell" });
-            }
-            Dovecot.get = get;
-            // Post dovecot command (start, reboot, stop)
-            function post(req, res) {
-            }
-            Dovecot.post = post;
-        })(Dovecot = Server.Dovecot || (Server.Dovecot = {}));
+            else
+                res.status(403).send({ please: "go hell" });
+        }
+        Server.post = post;
     })(Server = Routing.Server || (Routing.Server = {}));
 })(Routing = exports.Routing || (exports.Routing = {}));
 exports.__esModule = true;

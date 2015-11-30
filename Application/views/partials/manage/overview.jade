@@ -17,9 +17,9 @@ div(ng-controller="overviewController")
             span Server Status
             span(id="status-postfix")
         div(id="option-selection" class="btn-group-lg")
-            button(class="btn btn-success") Start
-            button(class="btn btn-warning") Reboot
-            button(class="btn btn-danger") Stop
+            button(class="btn btn-success" ng-click="sendCommand('start', 'postfix');") Start
+            button(class="btn btn-warning" ng-click="sendCommand('reboot', 'postfix');") Reboot
+            button(class="btn btn-danger" ng-click="sendCommand('stop', 'postfix');") Stop
             
     div(class="manage-menu overview-container")
         h2 Dovecot
@@ -28,6 +28,6 @@ div(ng-controller="overviewController")
             span Server Status
             span(id="status-dovecot")
         div(id="option-selection" class="btn-group-lg")
-            button(class="btn btn-success") Start
-            button(class="btn btn-warning") Reboot
-            button(class="btn btn-danger") Stop
+            button(class="btn btn-success" ng-click="sendCommand('start', 'dovecot');") Start
+            button(class="btn btn-warning" ng-click="sendCommand('reboot', 'dovecot');") Reboot
+            button(class="btn btn-danger" ng-click="sendCommand('stop', 'dovecot');") Stop
