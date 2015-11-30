@@ -39,7 +39,6 @@ export namespace Routing{
 	}
 	export namespace Overview{
 		export function get(req: express.Request, res: express.Response){
-			console.log((<any>req.session).logged);
 			if((<any>req.session).logged) 
 				res.render("partials/manage/overview");	
 			else
