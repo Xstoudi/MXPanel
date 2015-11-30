@@ -40,6 +40,10 @@ function appMain() {
     httpServer.get("/login", Routing_1["default"].Login.get);
     httpServer.post("/login", Routing_1["default"].Login.post);
     httpServer.get("/overview", Routing_1["default"].Overview.get);
+    httpServer.get("/server/postfix", Routing_1["default"].Server.Postfix.get);
+    httpServer.get("/server/dovecot", Routing_1["default"].Server.Dovecot.get);
+    httpServer.post("/server/postfix/:command", Routing_1["default"].Server.Postfix.post);
+    httpServer.post("/server/dovecot/:command", Routing_1["default"].Server.Dovecot.post);
     httpServer.listen(Configuration_1["default"].getHttpPort(), function () {
         Logger_1["default"].log("Listen for HTTP requests on " + Configuration_1["default"].getHttpPort());
     });

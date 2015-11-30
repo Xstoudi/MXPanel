@@ -51,6 +51,12 @@ function appMain(){
 	
 	httpServer.get("/overview", Routing.Overview.get);
 	
+	httpServer.get("/server/postfix", Routing.Server.Postfix.get);
+	httpServer.get("/server/dovecot", Routing.Server.Dovecot.get);
+	
+	httpServer.post("/server/postfix/:command", Routing.Server.Postfix.post);
+	httpServer.post("/server/dovecot/:command", Routing.Server.Dovecot.post);
+		
 	httpServer.listen(Configuration.getHttpPort(), () => {
 		Logger.log(`Listen for HTTP requests on ${Configuration.getHttpPort()}`)
 	});
