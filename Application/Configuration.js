@@ -10,7 +10,8 @@ var Configuration;
         sqlUser: "root",
         sqlPass: "",
         sqlDatabase: "hermes",
-        httpPort: 3000
+        httpPort: 3000,
+        panelPassword: "PoneyMagique"
     };
     var config = undefined;
     function loadConfiguration() {
@@ -61,6 +62,10 @@ var Configuration;
         return config.httpPort;
     }
     Configuration.getHttpPort = getHttpPort;
+    function getPanelPassword() {
+        return config.panelPassword;
+    }
+    Configuration.getPanelPassword = getPanelPassword;
 })(Configuration || (Configuration = {}));
 exports.__esModule = true;
 exports["default"] = Configuration;

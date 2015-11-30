@@ -15,7 +15,8 @@ namespace Configuration{
 		sqlUser: string,
 		sqlPass: string,
 		sqlDatabase: string,
-		httpPort: number
+		httpPort: number,
+		panelPassword: string
 	}
 	
 	let defaultConfig: IConfiguration = {
@@ -23,7 +24,8 @@ namespace Configuration{
 		sqlUser: "root",
 		sqlPass: "",
 		sqlDatabase: "hermes",
-		httpPort: 3000
+		httpPort: 3000,
+		panelPassword: "PoneyMagique"	
 	}
 
 	let config: IConfiguration = undefined;
@@ -73,6 +75,9 @@ namespace Configuration{
 	}
 	export function getHttpPort(){
 		return config.httpPort;
+	}
+	export function getPanelPassword(){
+		return config.panelPassword;
 	}
 }
 export default Configuration;
