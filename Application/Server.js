@@ -38,6 +38,8 @@ function appMain() {
     // Routes
     httpServer.get("/", Routing_1["default"].Home.get);
     httpServer.get("/login", Routing_1["default"].Login.get);
+    httpServer.post("/login", Routing_1["default"].Login.post);
+    httpServer.get("/overview", Routing_1["default"].Overview.get);
     httpServer.listen(Configuration_1["default"].getHttpPort(), function () {
         Logger_1["default"].log("Listen for HTTP requests on " + Configuration_1["default"].getHttpPort());
     });

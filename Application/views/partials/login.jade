@@ -1,7 +1,7 @@
 div(id="login-container" class="page-header")
-    h1 Connection
+    h1 Connexion
     hr
-    form(action="#" method="POST" ng-controller="loginController" ng-submit="submit();")
+    form(method="POST" ng-controller="loginController" ng-submit="submit();")
         div(id="badPasswordAlert" ng-click="hideBadPassword();" class="alert alert-warning alert-dismissible" role="alert" style="display: none;")
             button(type="button" class="alert close" aria-label="Close")
                 span(aria-hidden="true") &times;

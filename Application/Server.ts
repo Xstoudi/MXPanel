@@ -45,7 +45,11 @@ function appMain(){
 	
 	// Routes
 	httpServer.get("/", Routing.Home.get);
+	
 	httpServer.get("/login", Routing.Login.get);
+	httpServer.post("/login", Routing.Login.post);
+	
+	httpServer.get("/overview", Routing.Overview.get);
 	
 	httpServer.listen(Configuration.getHttpPort(), () => {
 		Logger.log(`Listen for HTTP requests on ${Configuration.getHttpPort()}`)

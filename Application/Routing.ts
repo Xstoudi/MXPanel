@@ -13,6 +13,18 @@ export namespace Routing{
 		export function get(req: express.Request, res: express.Response){
 			res.render("partials/login");
 		}
+		export function post(req: express.Request, res: express.Response){
+			if(req.body.password === Configuration.getPanelPassword()){
+				res.status(200).send({result: "ok"});
+			}else{
+				res.status(200).send({result: "nope"});
+			}
+		}
+	}
+	export namespace Overview{
+		export function get(req: express.Request, res: express.Response){
+			res.render("partials/manage/overview");	
+		}
 	}
 }
 export default Routing;
