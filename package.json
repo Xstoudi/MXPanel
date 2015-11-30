@@ -1,0 +1,30 @@
+{
+  "name": "mxpanel",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Application/Server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/Zafix/Email-Panel.git"
+  },
+  "author": {
+    "name": "Xavier Stouder",
+    "email": "xavier.stouder@divtec.ch",
+    "url": "http://idleweiss.ch/"
+  },
+  "contributors": [
+    {
+      "name": "Luca Laissue",
+      "email": "luca.laissue@divtec.ch",
+      "url": "http://idleweiss.ch/"
+    }
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/Zafix/Email-Panel/issues"
+  },
+  "homepage": "https://gitlab.com/Zafix/Email-Panel#README"
+}

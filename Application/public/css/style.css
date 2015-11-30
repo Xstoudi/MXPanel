@@ -1,0 +1,180 @@
+* {
+    box-sizing: border-box;
+}
+
+h1 {
+    font-weight: bold;
+}
+
+#login-container {
+    max-width: 600px;
+    margin: 0 auto;
+    border: 2px solid #ccc;
+    padding: 20px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    box-shadow: 2px 2px 2px #dedede;
+}
+
+.input {
+    margin: 15px 0;
+    overflow: auto;
+}
+
+.input-group {
+    width: 100%;
+}
+
+input[type="submit"]{
+    width: 37%;
+    display: block;
+}
+* {
+    box-sizing: border-box;
+}
+
+body{
+    height: 100%;
+    overflow: auto;
+}
+
+header{
+    background: #2B2B2B;
+    border-bottom: 5px solid #851307;
+    padding: 20px 0;
+    margin-bottom: 50px;
+}
+
+nav ul {
+    text-align: center;
+    margin: 0;
+}
+
+nav ul li{
+    display: inline;
+    vertical-align: bottom;
+    padding: 0 5px;
+    margin: 0;
+}
+
+nav ul li a{
+    color: #fff;
+    width: 100%;
+    font-size: 175%;
+}
+
+nav ul li a:hover,
+nav ul li a:visited{
+    color: #FF250D;
+    text-decoration: none;
+}
+
+.manage-menu{
+    display: block;
+    float: left;
+    text-align: center;
+}
+
+#overview-container{
+    text-align: center;
+    margin: 0 auto;
+    width: 50%;
+    padding: 120px 100px 0 100px;
+    float: left;
+}
+
+#overview-container h2{
+    font-weight: lighter;
+}
+
+#overview-container #serveur-status {
+    font-weight: bold;
+    font-size: 150%;
+    margin: 0 0 20px 0;
+}
+
+#overview-container #option-selection button{
+    margin: 0 7px;
+    box-shadow: 3px 3px 3px #ccc;
+}
+
+#manage-btn-control .input-group{
+    margin: 10px 0;
+}
+
+#manage-btn-control {
+    margin: 20px 50px 10px auto;
+    max-width: 600px;
+    background: #F9F6FF;
+    padding: 5px 10px;
+    width: 40%;
+    border-radius: 5px;
+    box-shadow: 3px 3px 3px 2px #ccc;
+    vertical-align: middle;
+}
+
+#manage-btn-control #new-user-input{
+    width: 100%;
+}
+
+#manage-btn-control input[type="text"]{
+    width: 70%;
+    display: block;
+    float: left;
+}
+
+#manage-btn-control h2{
+    font-size: 150%;
+}
+
+#manage-btn-control button{
+    margin: 10px 0 0 auto;
+    display: block;
+    width: 70px;
+}
+
+#manage-btn-control #domain-selection{
+    float: right;
+    vertical-align: middle;
+}
+#manage-btn-control #domain-selection-button{
+    vertical-align: middle;
+    margin: 0;
+}
+#manage-btn-control .dropdown-toggle{
+    vertical-align: middle;
+    margin: 0;
+}
+
+#user-list{
+    overflow: auto;
+    display: block;
+    background: #F9F6FF;
+    box-shadow: 3px 3px 3px 2px #ccc;
+    padding: 5px 10px;
+    padding-bottom: 20px;
+    border-radius: 5px;
+    width: 50%;
+    margin: 20px auto 0 5%;
+    float: left;
+    vertical-align: middle;
+}
+
+#user-list h2{
+    font-size: 150%;
+}
+
+#user-list a{
+    width: 90%;
+}
+
+#user-list .list-group-item span{
+    display: block;
+    width: 90%;
+    float: left;
+}
+
+#user-list .list-group-item button{
+    display: block;
+    margin: 0 0 0 auto;
+}

@@ -1,0 +1,15 @@
+div(id="login-container" class="page-header")
+    h1 Connexion
+    hr
+    form(method="POST" ng-controller="loginController" ng-submit="submit();")
+        div(id="badPasswordAlert" ng-click="hideBadPassword();" class="alert alert-warning alert-dismissible" role="alert" style="display: none;")
+            button(type="button" class="alert close" aria-label="Close")
+                span(aria-hidden="true") &times;
+            strong Warning!
+            span   Wrong password...
+        div(class="input-group" id="passwd-group")
+            input(type="password" class="form-control" placeholder="Password" id="password" name="password" ng-model="password")
+            span(class="input-group-addon" id="passwd-span")
+                i(class="fa fa-key fa-fw")
+        div(class="input")
+            input(type="submit" class="btn btn-success" value="Login")
