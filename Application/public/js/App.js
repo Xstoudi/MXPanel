@@ -23,7 +23,6 @@ ngApp.config(function ($routeProvider) {
                     $window.location.reload();
                 }
                 else {
-                    console.log("YOLO");
                     $location.path("/overview").replace();
                     $scope.$apply();
                 }
@@ -40,6 +39,34 @@ ngApp.config(function ($routeProvider) {
             data: { password: password },
             error: onError,
             success: onSuccess
+        });
+    };
+})
+    .controller("overviewController", function ($scope) {
+    $scope.refreshStatus = function () {
+        // Postfix
+        $.ajax({
+            type: "get",
+            url: "/server/postfix",
+            dataType: "json",
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log("Error !" + textStatus);
+            },
+            success: function (data, textStatus, jqXHR) {
+                document.querySelector("#status-postfix").innerHTML = data.status == "ok" ? "OK" : "DOWN";
+            }
+        });
+        // Dovecot
+        $.ajax({
+            type: "get",
+            url: "/server/dovecot",
+            dataType: "json",
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log("Error !" + textStatus);
+            },
+            success: function (data, textStatus, jqXHR) {
+                document.querySelector("#status-dovecot").innerHTML = data.status == "ok" ? "OK" : "DOWN";
+            }
         });
     };
 });

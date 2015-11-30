@@ -22,7 +22,6 @@ ngApp.config(($routeProvider) => {
 				if($location.path() != "/login"){
 					$window.location.reload();
 				}else{
-					console.log("YOLO");
 					$location.path("/overview").replace();
 					$scope.$apply();
 				}
@@ -42,4 +41,33 @@ ngApp.config(($routeProvider) => {
 		});
 	}
 	
+})
+.controller("overviewController", ($scope) => {
+	$scope.refreshStatus = () => {
+		// Postfix
+		$.ajax({
+			type: "get",
+			url: "/server/postfix",
+			dataType: "json",
+			error: (jqXHR: JQueryXHR, textStatus: string, errorThrown: string) => {
+				console.log("Error !" + textStatus);
+			},
+			success: (data: any, textStatus: string, jqXHR: JQueryXHR) => {
+				(<HTMLElement>document.querySelector("#status-postfix")).innerHTML = data.status == "ok" ? "OK" : "DOWN";
+			}
+		});
+		
+		// Dovecot
+		$.ajax({
+			type: "get",
+			url: "/server/dovecot",
+			dataType: "json",
+			error: (jqXHR: JQueryXHR, textStatus: string, errorThrown: string) => {
+				console.log("Error !" + textStatus);
+			},
+			success: (data: any, textStatus: string, jqXHR: JQueryXHR) => {
+				(<HTMLElement>document.querySelector("#status-dovecot")).innerHTML = data.status == "ok" ? "OK" : "DOWN";
+			}
+		});
+	}
 })
