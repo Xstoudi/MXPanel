@@ -1,7 +1,0 @@
-{
-	"sqlHost": "localhost",
-	"sqlUser": "root",
-	"sqlPass": "",
-	"sqlDatabase": "hermes",
-	"httpPort": 3000
-}
