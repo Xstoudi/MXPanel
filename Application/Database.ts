@@ -60,14 +60,6 @@ export namespace Database{
 				});
 			});
 		});
-		
-		/*
-		
-		INSERT INTO `mailserver`.`virtual_users`
-  (`id`, `domain_id`, `password` , `email`)
-VALUES
-  ('1', '1', ENCRYPT('password', CONCAT('$6$', SUBSTRING(SHA(RAND()), -16))), 'email1@example.com'),
-  ('2', '1', ENCRYPT('password', CONCAT('$6$', SUBSTRING(SHA(RAND()), -16))), 'email2@example.com');*/
 	}
 	
 	export function getDomain(identifier: string | number, callback: (identifier: string | number) => void){
