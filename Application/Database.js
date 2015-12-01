@@ -21,6 +21,14 @@ var Database;
         });
     }
     Database.getUsers = getUsers;
+    function deleteUser(id, callback) {
+        Database.sqlServer.query("DELETE FROM virtual_users WHERE id=?", [id], function (err, rows, fields) {
+            if (!Logger_1["default"].err(err)) {
+                callback();
+            }
+        });
+    }
+    Database.deleteUser = deleteUser;
 })(Database = exports.Database || (exports.Database = {}));
 exports.__esModule = true;
 exports["default"] = Database;

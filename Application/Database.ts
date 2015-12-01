@@ -4,7 +4,7 @@ import Configuration from "./Configuration";
 import * as mysql from "mysql";
 
 export namespace Database{
-	export let sqlServer = undefined;
+	export let sqlServer: mysql.IConnection = undefined;
 
 	export function loadDatabaseInfo(){
 		sqlServer = mysql.createConnection({
@@ -19,6 +19,14 @@ export namespace Database{
 		sqlServer.query("SELECT id, email FROM virtual_users", (err, rows, fields) => {
 			if(!Logger.err(err)){
 				callback(rows);
+			}
+		});
+	}
+	
+	export function deleteUser(id: number, callback: () => void){
+		sqlServer.query("DELETE FROM virtual_users WHERE id=?", [id], (err, rows, fields) => {
+			if(!Logger.err(err)){
+				callback();
 			}
 		});
 	}

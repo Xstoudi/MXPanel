@@ -8,13 +8,14 @@ div(ng-controller="usersController")
                     li(class="active")
                         a(href="#") User management
                     div(id="logout-button")
+                        button(class="btn btn-primary") Refresh 
                         button(class="btn btn-danger" ng-click="logout();") Logout
     div(id="user-list" class="list-group")
         h2 Users List
         - for(var i = 0; i < users.length; ++i){
-            div(class="list-group-item")
+            div(id!="user-" + users[i].id + "" class="list-group-item")
                 span(href="#")= users[i].email
-                button(class="btn btn-danger")
+                button(class="btn btn-danger" ng-click!="deleteUser(" + users[i].id + ")")
                     i(class="fa fa-trash")
         -}
     div(id="manage-btn-control")

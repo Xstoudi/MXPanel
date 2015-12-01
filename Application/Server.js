@@ -39,6 +39,7 @@ function appMain() {
     httpServer.get("/server/:server", Routing_1["default"].Server.get);
     httpServer.post("/server/:server/:command", Routing_1["default"].Server.post);
     httpServer.get("/users", Routing_1["default"].Users.get);
+    httpServer.delete("/users/delete/:id", Routing_1["default"].Users._delete);
     httpServer.listen(Configuration_1["default"].getHttpPort(), function () {
         Logger_1["default"].log("Listen for HTTP requests on " + Configuration_1["default"].getHttpPort());
     });

@@ -97,6 +97,7 @@ var Routing;
         function get(req, res) {
             if (req.session.logged) {
                 Database_1["default"].getUsers(function (users) {
+                    console.log(JSON.stringify(users));
                     res.render("partials/manage/users", { users: users });
                 });
             }
@@ -104,6 +105,16 @@ var Routing;
                 res.render("partials/login");
         }
         Users.get = get;
+        function _delete(req, res) {
+            if (req.session.logged) {
+                Database_1["default"].deleteUser(req.params.id, function () {
+                    res.status(200).send({});
+                });
+            }
+            else
+                res.render("partials/login");
+        }
+        Users._delete = _delete;
     })(Users = Routing.Users || (Routing.Users = {}));
 })(Routing = exports.Routing || (exports.Routing = {}));
 exports.__esModule = true;

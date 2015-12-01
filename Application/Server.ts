@@ -52,6 +52,7 @@ function appMain(){
 	httpServer.post("/server/:server/:command", Routing.Server.post);
 	
 	httpServer.get("/users", Routing.Users.get);
+	httpServer.delete("/users/delete/:id", Routing.Users._delete);
 			
 	httpServer.listen(Configuration.getHttpPort(), () => {
 		Logger.log(`Listen for HTTP requests on ${Configuration.getHttpPort()}`)

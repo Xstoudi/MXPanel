@@ -18,7 +18,7 @@ ngApp.config(($routeProvider) => {
 	}
 	$scope.submit = () => {
 		function onError(jqXHR: JQueryXHR, textStatus: string, errorThrown: string){
-			console.log("Error !" + textStatus);
+			console.log("Error ! " + textStatus);
 		}
 		function onSuccess(data: any, textStatus: string, jqXHR: JQueryXHR){
 			if(data.result == "ok"){
@@ -51,7 +51,7 @@ ngApp.config(($routeProvider) => {
 			url: "/logout",
 			dataType: "json",
 			error: (jqXHR: JQueryXHR, textStatus: string, errorThrown: string) => {
-				console.log("Error !" + textStatus);
+				console.log("Error ! " + textStatus);
 			},
 			success: (data: any, textStatus: string, jqXHR: JQueryXHR) => {
 				let currentPageTemplate = $route.current.templateUrl;
@@ -71,7 +71,7 @@ ngApp.config(($routeProvider) => {
 			url: "/server/postfix",
 			dataType: "json",
 			error: (jqXHR: JQueryXHR, textStatus: string, errorThrown: string) => {
-				console.log("Error !" + textStatus);
+				console.log("Error ! " + textStatus);
 			},
 			success: (data: any, textStatus: string, jqXHR: JQueryXHR) => {
 				(<HTMLElement>document.querySelector("#status-postfix")).innerHTML = " " + (data.status == "ok" ? "OK" : "DOWN");
@@ -86,7 +86,7 @@ ngApp.config(($routeProvider) => {
 			url: "/server/dovecot",
 			dataType: "json",
 			error: (jqXHR: JQueryXHR, textStatus: string, errorThrown: string) => {
-				console.log("Error !" + textStatus);
+				console.log("Error ! " + textStatus);
 			},
 			success: (data: any, textStatus: string, jqXHR: JQueryXHR) => {
 				(<HTMLElement>document.querySelector("#status-dovecot")).innerHTML = " " + (data.status == "ok" ? "OK" : "DOWN");
@@ -109,7 +109,7 @@ ngApp.config(($routeProvider) => {
 			url: `/server/${server}/${command}`,
 			dataType: "json",
 			error: (jqXHR: JQueryXHR, textStatus: string, errorThrown: string) => {
-				console.log("Error !" + textStatus);
+				console.log("Error ! " + textStatus);
 			},
 			success: (data: any, textStatus: string, jqXHR: JQueryXHR) => {
 				$scope.refreshStatus();
@@ -119,7 +119,7 @@ ngApp.config(($routeProvider) => {
 	
 	$scope.refreshStatus();
 })
-.controller("usersController", ($scope) => {
+.controller("usersController", ($scope, $location, $route, $templateCache) => {
 	let links = $("#manage-btn-control #new-user-input #domain-selection .dropdown-menu a");
     links.each((i, link) => {
         let linkBis = $(link);
@@ -136,4 +136,19 @@ ngApp.config(($routeProvider) => {
             //fait ce que tu veux :D
         }
     });
+	
+	$scope.deleteUser = (id: number) => {
+		$.ajax({
+			type: "delete",
+			url: `/users/delete/${id}`,
+			dataType: "json",
+			error: (jqXHR: JQueryXHR, textStatus: string, errorThrown: string) => {
+				console.log("Error ! " + errorThrown);
+			},
+			success: (data: any, textStatus: string, jqXHR: JQueryXHR) => {
+				let toRemove = document.querySelector(`#user-${id}`);
+				toRemove.parentNode.removeChild(toRemove)
+			}
+		});
+	}
 })
