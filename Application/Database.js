@@ -49,6 +49,7 @@ var Database;
                     return;
                 }
                 var email = user + "@" + domain;
+                console.log(domainId);
                 var request = "INSERT INTO virtual_users (domain_id, password, email) VALUES (?, ENCRYPT(?, CONCAT('$6$', SUBSTRING(SHA(RAND()), -16))), ?)";
                 Database.sqlServer.query(request, [domainId, password, email], function (err, rows, fields) {
                     if (!Logger_1["default"].err(err)) {

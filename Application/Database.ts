@@ -52,6 +52,7 @@ export namespace Database{
 					return;
 				}
 				let email = `${user}@${domain}`;
+				console.log(domainId);
 				let request = "INSERT INTO virtual_users (domain_id, password, email) VALUES (?, ENCRYPT(?, CONCAT('$6$', SUBSTRING(SHA(RAND()), -16))), ?)";
 				sqlServer.query(request, [domainId, password, email], (err, rows, fields) => {
 					if(!Logger.err(err)){
