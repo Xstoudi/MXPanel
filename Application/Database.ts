@@ -53,7 +53,6 @@ export namespace Database{
 				}
 				let email = `${user}@${domain}`;
 				let request = "INSERT INTO virtual_users (domain_id, password, email) VALUES (?, ENCRYPT(?, CONCAT('$6$', SUBSTRING(SHA(RAND()), -16))), ?)";
-				console.log(password);
 				sqlServer.query(request, [domainId, password, email], (err, rows, fields) => {
 					if(!Logger.err(err)){
 						callback("User created");
@@ -61,14 +60,6 @@ export namespace Database{
 				});
 			});
 		});
-		
-		/*
-		
-		INSERT INTO `mailserver`.`virtual_users`
-  (`id`, `domain_id`, `password` , `email`)
-VALUES
-  ('1', '1', ENCRYPT('password', CONCAT('$6$', SUBSTRING(SHA(RAND()), -16))), 'email1@example.com'),
-  ('2', '1', ENCRYPT('password', CONCAT('$6$', SUBSTRING(SHA(RAND()), -16))), 'email2@example.com');*/
 	}
 	
 	export function getDomain(identifier: string | number, callback: (identifier: string | number) => void){

@@ -50,7 +50,6 @@ var Database;
                 }
                 var email = user + "@" + domain;
                 var request = "INSERT INTO virtual_users (domain_id, password, email) VALUES (?, ENCRYPT(?, CONCAT('$6$', SUBSTRING(SHA(RAND()), -16))), ?)";
-                console.log(password);
                 Database.sqlServer.query(request, [domainId, password, email], function (err, rows, fields) {
                     if (!Logger_1["default"].err(err)) {
                         callback("User created");
@@ -58,13 +57,6 @@ var Database;
                 });
             });
         });
-        /*
-        
-        INSERT INTO `mailserver`.`virtual_users`
-  (`id`, `domain_id`, `password` , `email`)
-VALUES
-  ('1', '1', ENCRYPT('password', CONCAT('$6$', SUBSTRING(SHA(RAND()), -16))), 'email1@example.com'),
-  ('2', '1', ENCRYPT('password', CONCAT('$6$', SUBSTRING(SHA(RAND()), -16))), 'email2@example.com');*/
     }
     Database.createUser = createUser;
     function getDomain(identifier, callback) {

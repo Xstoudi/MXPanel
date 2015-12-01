@@ -131,6 +131,23 @@ ngApp.config(($routeProvider) => {
         });
     });
 	
+	$scope.logout = () => {
+		$.ajax({
+			type: "post",
+			url: "/logout",
+			dataType: "json",
+			error: (jqXHR: JQueryXHR, textStatus: string, errorThrown: string) => {
+				console.log("Error ! " + textStatus);
+			},
+			success: (data: any, textStatus: string, jqXHR: JQueryXHR) => {
+				let currentPageTemplate = $route.current.templateUrl;
+				$templateCache.remove(currentPageTemplate);
+				$location.path("/login").replace();
+				$scope.$apply();
+			}
+		});
+	}
+	
 	$scope.deleteUser = (id: number) => {
 		$.ajax({
 			type: "delete",
@@ -167,6 +184,7 @@ ngApp.config(($routeProvider) => {
 			success: (data: any, textStatus: string, jqXHR: JQueryXHR) => {
 				(<HTMLElement>document.querySelector("#errorText")).innerHTML = `&nbsp;&nbsp;&nbsp;${data.message}`;
 				(<HTMLElement>document.querySelector("#errorAddingUser")).style.display = "block";
+				location.reload(true);
 			}
 		});
 	}

@@ -128,6 +128,22 @@ ngApp.config(function ($routeProvider) {
             $("#domain-selection-button").html(linkBis.html());
         });
     });
+    $scope.logout = function () {
+        $.ajax({
+            type: "post",
+            url: "/logout",
+            dataType: "json",
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log("Error ! " + textStatus);
+            },
+            success: function (data, textStatus, jqXHR) {
+                var currentPageTemplate = $route.current.templateUrl;
+                $templateCache.remove(currentPageTemplate);
+                $location.path("/login").replace();
+                $scope.$apply();
+            }
+        });
+    };
     $scope.deleteUser = function (id) {
         $.ajax({
             type: "delete",
@@ -161,6 +177,7 @@ ngApp.config(function ($routeProvider) {
             success: function (data, textStatus, jqXHR) {
                 document.querySelector("#errorText").innerHTML = "&nbsp;&nbsp;&nbsp;" + data.message;
                 document.querySelector("#errorAddingUser").style.display = "block";
+                location.reload(true);
             }
         });
     };
