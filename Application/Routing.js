@@ -97,7 +97,6 @@ var Routing;
         function get(req, res) {
             if (req.session.logged) {
                 Database_1["default"].getUsers(function (users) {
-                    console.log(JSON.stringify(users));
                     res.render("partials/manage/users", { users: users });
                 });
             }

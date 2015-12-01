@@ -87,7 +87,6 @@ export namespace Routing{
 		export function get(req: express.Request, res: express.Response){
 			if((<any>req.session).logged) {
 				Database.getUsers((users) => {
-					console.log(JSON.stringify(users));
 					res.render("partials/manage/users", {users: users});
 				});
 			}else
