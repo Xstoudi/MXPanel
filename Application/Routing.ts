@@ -102,7 +102,44 @@ export namespace Routing{
 			}else
 				res.render("partials/login");
 		}
-		
+		export function post(req: express.Request, res: express.Response){
+			if((<any>req.session).logged) {
+				let username = req.body.username;
+				let pass = req.body.pass;
+				let passRepeat = req.body.passRepeat;
+				let domain = req.body.domain;
+				
+				if(username != undefined && username != ""){
+					if(pass != undefined && pass != ""){
+						if(pass === passRepeat){
+							if(domain != undefined && domain != ""){
+								Database.createUser(domain, username, pass, (message: string) => {
+									res.status(200).send({message: message});
+								})
+							}else{
+								res.status(200).send({message: "Please select a valid domain"})
+							}
+						}else{
+							res.status(200).send({message: "Passwords don't match"})
+						}
+					}else{
+						res.status(200).send({message: "Please type a valid password"})
+					}
+				}else{
+					res.status(200).send({message: "Please type an username"})
+				}
+			}else
+				res.render("partials/login");
+		}
+	}
+	
+	export namespace Logs{
+		export function get(req: express.Request, res: express.Response){
+			if((<any>req.session).logged) 
+				res.render("partials/manage/logs");	
+			else
+				res.render("partials/login");
+		}
 	}
 }
 export default Routing;

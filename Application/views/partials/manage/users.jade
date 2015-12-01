@@ -20,6 +20,11 @@ div(ng-controller="usersController")
         -}
     div(id="manage-btn-control")
         h2 Add an user
+        div(id="errorAddingUser" ng-click="hideError();" class="alert alert-warning alert-dismissible" role="alert" style="display: none;")
+            button(type="button" class="alert close" aria-label="Close")
+                span(aria-hidden="true") &times;
+            strong Warning!
+            span(id="errorText")
         div(class="input-group" id="new-user-input")
             input(type="text" class="form-control" placeholder="Username")
             div(class="btn-group" id="domain-selection")
@@ -40,7 +45,7 @@ div(ng-controller="usersController")
             input(type="password" class="form-control" placeholder="Repeat Password")
             span(class="input-group-addon")
                 i(class="fa fa-key fa-fw")
-        button(class="btn btn-success") Add
+        button(class="btn btn-success" ng-click="createUser();") Add
         
     script(src="../vendors/jquery.js")
     script(src="../vendors\bootstrap-3.3.5-dist\bootstrap-3.3.5-dist\js\bootstrap.min.js")

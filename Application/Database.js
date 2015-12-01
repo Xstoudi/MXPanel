@@ -29,6 +29,55 @@ var Database;
         });
     }
     Database.deleteUser = deleteUser;
+    function existsUser(user, callback) {
+        Database.sqlServer.query("SELECT email FROM virtual_users WHERE email=?", [user], function (err, rows, fields) {
+            if (!Logger_1["default"].err(err)) {
+                callback(rows.length > 0);
+            }
+        });
+    }
+    Database.existsUser = existsUser;
+    function createUser(domain, user, password, callback) {
+        getDomain(domain, function (domainId) {
+            if (domainId == undefined) {
+                callback("Domain doesn't exist");
+                return;
+            }
+            existsUser(user, function (exists) {
+                if (exists) {
+                    callback("User already exists");
+                    return;
+                }
+                var email = user + "@" + domain;
+                var request = "INSERT INTO virtual_users (domain_id, password, email) VALUES (?, ENCRYPT(?, CONCAT('$6$', SUBSTRING(SHA(RAND()), -16))), ?)";
+                console.log(password);
+                Database.sqlServer.query(request, [domainId, password, email], function (err, rows, fields) {
+                    if (!Logger_1["default"].err(err)) {
+                        callback("User created");
+                    }
+                });
+            });
+        });
+        /*
+        
+        INSERT INTO `mailserver`.`virtual_users`
+  (`id`, `domain_id`, `password` , `email`)
+VALUES
+  ('1', '1', ENCRYPT('password', CONCAT('$6$', SUBSTRING(SHA(RAND()), -16))), 'email1@example.com'),
+  ('2', '1', ENCRYPT('password', CONCAT('$6$', SUBSTRING(SHA(RAND()), -16))), 'email2@example.com');*/
+    }
+    Database.createUser = createUser;
+    function getDomain(identifier, callback) {
+        Database.sqlServer.query("SELECT " + (typeof identifier === "string" ? "id" : "name") + " FROM virtual_domains WHERE " + (typeof identifier === "string" ? "name" : "id") + "=? LIMIT 1", [identifier], function (err, rows, fields) {
+            if (!Logger_1["default"].err(err)) {
+                callback(rows[0]);
+            }
+            else {
+                callback(undefined);
+            }
+        });
+    }
+    Database.getDomain = getDomain;
 })(Database = exports.Database || (exports.Database = {}));
 exports.__esModule = true;
 exports["default"] = Database;
