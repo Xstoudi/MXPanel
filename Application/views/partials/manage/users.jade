@@ -1,0 +1,46 @@
+div(ng-controller="usersController")
+    header
+        nav(class="navbar navbar-default navbar-inverse navbar-fixed-top")
+            div(class="container")
+                ul(class="nav navbar-nav")
+                    li
+                        a(href="#/overview") Overview
+                    li(class="active")
+                        a(href="#/users") User management
+                    div(id="logout-button")
+                        button(class="btn btn-primary") Refresh 
+                        button(class="btn btn-danger" ng-click="logout();") Logout
+    div(id="user-list" class="list-group")
+        h2 Users List
+        - for(var i = 0; i < users.length; ++i){
+            div(id!="user-" + users[i].id + "" class="list-group-item")
+                span(href="#")= users[i].email
+                button(class="btn btn-danger" ng-click!="deleteUser(" + users[i].id + ")")
+                    i(class="fa fa-trash")
+        -}
+    div(id="manage-btn-control")
+        h2 Add an user
+        div(class="input-group" id="new-user-input")
+            input(type="text" class="form-control" placeholder="Username")
+            div(class="btn-group" id="domain-selection")
+                button(type="button" class="btn" id="domain-selection-button") Domaine
+                button(type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+                    span(class="caret")
+                    span(class="sr-only") Toggle Dropdown
+                ul(class="dropdown-menu")
+                    li
+                        a(href="") idleweiss.ch
+                    li
+                        a(href="") divtec.ch
+        div(class="input-group" id="password")
+            input(type="password" class="form-control" placeholder="Password")
+            span(class="input-group-addon")
+                i(class="fa fa-key fa-fw")
+        div(class="input-group" id="password-repeat")
+            input(type="password" class="form-control" placeholder="Repeat Password")
+            span(class="input-group-addon")
+                i(class="fa fa-key fa-fw")
+        button(class="btn btn-success") Add
+        
+    script(src="../vendors/jquery.js")
+    script(src="../vendors\bootstrap-3.3.5-dist\bootstrap-3.3.5-dist\js\bootstrap.min.js")

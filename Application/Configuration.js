@@ -36,10 +36,12 @@ var Configuration;
         var configContent = undefined;
         try {
             configContent = fs.readFileSync(configPath, { encoding: "utf8" });
+            config = configContent ? JSON.parse(configContent) : defaultConfig;
+            Logger_1["default"].log("Configuration loaded !");
         }
-        catch (err) { }
-        config = configContent ? JSON.parse(configContent) : defaultConfig;
-        Logger_1["default"].log("Configuration loaded !");
+        catch (err) {
+            Logger_1["default"].err(err);
+        }
     }
     // Getters
     function getSqlHost() {

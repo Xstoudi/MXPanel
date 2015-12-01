@@ -7,6 +7,9 @@ ngApp.config(function ($routeProvider) {
         .when("/overview", {
         templateUrl: "/overview"
     })
+        .when("/users", {
+        templateUrl: "/users"
+    })
         .otherwise("/login");
 })
     .controller("loginController", function ($scope, $location, $window) {
@@ -15,7 +18,7 @@ ngApp.config(function ($routeProvider) {
     };
     $scope.submit = function () {
         function onError(jqXHR, textStatus, errorThrown) {
-            console.log("Error !" + textStatus);
+            console.log("Error ! " + textStatus);
         }
         function onSuccess(data, textStatus, jqXHR) {
             if (data.result == "ok") {
@@ -49,7 +52,7 @@ ngApp.config(function ($routeProvider) {
             url: "/logout",
             dataType: "json",
             error: function (jqXHR, textStatus, errorThrown) {
-                console.log("Error !" + textStatus);
+                console.log("Error ! " + textStatus);
             },
             success: function (data, textStatus, jqXHR) {
                 var currentPageTemplate = $route.current.templateUrl;
@@ -68,7 +71,7 @@ ngApp.config(function ($routeProvider) {
             url: "/server/postfix",
             dataType: "json",
             error: function (jqXHR, textStatus, errorThrown) {
-                console.log("Error !" + textStatus);
+                console.log("Error ! " + textStatus);
             },
             success: function (data, textStatus, jqXHR) {
                 document.querySelector("#status-postfix").innerHTML = " " + (data.status == "ok" ? "OK" : "DOWN");
@@ -82,7 +85,7 @@ ngApp.config(function ($routeProvider) {
             url: "/server/dovecot",
             dataType: "json",
             error: function (jqXHR, textStatus, errorThrown) {
-                console.log("Error !" + textStatus);
+                console.log("Error ! " + textStatus);
             },
             success: function (data, textStatus, jqXHR) {
                 document.querySelector("#status-dovecot").innerHTML = " " + (data.status == "ok" ? "OK" : "DOWN");
@@ -105,7 +108,7 @@ ngApp.config(function ($routeProvider) {
             url: "/server/" + server + "/" + command,
             dataType: "json",
             error: function (jqXHR, textStatus, errorThrown) {
-                console.log("Error !" + textStatus);
+                console.log("Error ! " + textStatus);
             },
             success: function (data, textStatus, jqXHR) {
                 $scope.refreshStatus();
@@ -113,4 +116,35 @@ ngApp.config(function ($routeProvider) {
         });
     };
     $scope.refreshStatus();
+})
+    .controller("usersController", function ($scope, $location, $route, $templateCache) {
+    var links = $("#manage-btn-control #new-user-input #domain-selection .dropdown-menu a");
+    links.each(function (i, link) {
+        var linkBis = $(link);
+        linkBis.on("click", function () {
+            $("#domain-selection-button").html(linkBis.html());
+        });
+    });
+    var addButton = $("#manage-btn-control .btn-success");
+    addButton.on("click", function (e) {
+        if ($("#password input").val() != $("#password-repeat input").val()) {
+            alert("Les mots de passe doivent correspondre !");
+        }
+        else {
+        }
+    });
+    $scope.deleteUser = function (id) {
+        $.ajax({
+            type: "delete",
+            url: "/users/delete/" + id,
+            dataType: "json",
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log("Error ! " + errorThrown);
+            },
+            success: function (data, textStatus, jqXHR) {
+                var toRemove = document.querySelector("#user-" + id);
+                toRemove.parentNode.removeChild(toRemove);
+            }
+        });
+    };
 });
