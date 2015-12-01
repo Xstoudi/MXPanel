@@ -114,7 +114,51 @@ var Routing;
                 res.render("partials/login");
         }
         Users._delete = _delete;
+        function post(req, res) {
+            if (req.session.logged) {
+                var username = req.body.username;
+                var pass = req.body.pass;
+                var passRepeat = req.body.passRepeat;
+                var domain = req.body.domain;
+                if (username != undefined && username != "") {
+                    if (pass != undefined && pass != "") {
+                        if (pass === passRepeat) {
+                            if (domain != undefined && domain != "") {
+                                Database_1["default"].createUser(domain, username, pass, function (message) {
+                                    res.status(200).send({ message: message });
+                                });
+                            }
+                            else {
+                                res.status(200).send({ message: "Please select a valid domain" });
+                            }
+                        }
+                        else {
+                            res.status(200).send({ message: "Passwords don't match" });
+                        }
+                    }
+                    else {
+                        res.status(200).send({ message: "Please type a valid password" });
+                    }
+                }
+                else {
+                    res.status(200).send({ message: "Please type an username" });
+                }
+            }
+            else
+                res.render("partials/login");
+        }
+        Users.post = post;
     })(Users = Routing.Users || (Routing.Users = {}));
+    var Logs;
+    (function (Logs) {
+        function get(req, res) {
+            if (req.session.logged)
+                res.render("partials/manage/logs");
+            else
+                res.render("partials/login");
+        }
+        Logs.get = get;
+    })(Logs = Routing.Logs || (Routing.Logs = {}));
 })(Routing = exports.Routing || (exports.Routing = {}));
 exports.__esModule = true;
 exports["default"] = Routing;

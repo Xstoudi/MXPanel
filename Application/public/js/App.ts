@@ -10,6 +10,9 @@ ngApp.config(($routeProvider) => {
 		.when("/users", {
 			templateUrl: "/users"
 		})
+		.when("/logs", {
+			templateUrl: "/logs"
+		})
 		.otherwise("/login");
 })
 .controller("loginController", ($scope, $location, $window) => {
@@ -127,15 +130,6 @@ ngApp.config(($routeProvider) => {
             $("#domain-selection-button").html(linkBis.html())
         });
     });
-
-    let addButton = $("#manage-btn-control .btn-success");
-    addButton.on("click", (e) => {
-        if($("#password input").val() != $("#password-repeat input").val()){
-            alert("Les mots de passe doivent correspondre !");
-        } else {
-            //fait ce que tu veux :D
-        }
-    });
 	
 	$scope.deleteUser = (id: number) => {
 		$.ajax({
@@ -148,6 +142,31 @@ ngApp.config(($routeProvider) => {
 			success: (data: any, textStatus: string, jqXHR: JQueryXHR) => {
 				let toRemove = document.querySelector(`#user-${id}`);
 				toRemove.parentNode.removeChild(toRemove)
+			}
+		});
+	}
+	
+	$scope.hideError = () => {
+		(<HTMLElement>document.querySelector("#errorAddingUser")).style.display = "none";
+	}
+	
+	$scope.createUser = () => {
+		let username = (<HTMLInputElement>document.querySelector("#new-user-input input")).value;
+		let pass = (<HTMLInputElement>document.querySelector("#password input")).value;
+		let passRepeat = (<HTMLInputElement>document.querySelector("#password-repeat input")).value;
+		let domain = $("#manage-btn-control #new-user-input #domain-selection .dropdown-menu a").html();
+		
+		$.ajax({
+			type: "post",
+			url: `/users/create`,
+			dataType: "json",
+			data: {username: username, pass: pass, passRepeat: passRepeat, domain: domain},
+			error: (jqXHR: JQueryXHR, textStatus: string, errorThrown: string) => {
+				console.log("Error ! " + errorThrown);
+			},
+			success: (data: any, textStatus: string, jqXHR: JQueryXHR) => {
+				(<HTMLElement>document.querySelector("#errorText")).innerHTML = `&nbsp;&nbsp;&nbsp;${data.message}`;
+				(<HTMLElement>document.querySelector("#errorAddingUser")).style.display = "block";
 			}
 		});
 	}

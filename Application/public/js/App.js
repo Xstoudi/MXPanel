@@ -10,6 +10,9 @@ ngApp.config(function ($routeProvider) {
         .when("/users", {
         templateUrl: "/users"
     })
+        .when("/logs", {
+        templateUrl: "/logs"
+    })
         .otherwise("/login");
 })
     .controller("loginController", function ($scope, $location, $window) {
@@ -125,14 +128,6 @@ ngApp.config(function ($routeProvider) {
             $("#domain-selection-button").html(linkBis.html());
         });
     });
-    var addButton = $("#manage-btn-control .btn-success");
-    addButton.on("click", function (e) {
-        if ($("#password input").val() != $("#password-repeat input").val()) {
-            alert("Les mots de passe doivent correspondre !");
-        }
-        else {
-        }
-    });
     $scope.deleteUser = function (id) {
         $.ajax({
             type: "delete",
@@ -144,6 +139,28 @@ ngApp.config(function ($routeProvider) {
             success: function (data, textStatus, jqXHR) {
                 var toRemove = document.querySelector("#user-" + id);
                 toRemove.parentNode.removeChild(toRemove);
+            }
+        });
+    };
+    $scope.hideError = function () {
+        document.querySelector("#errorAddingUser").style.display = "none";
+    };
+    $scope.createUser = function () {
+        var username = document.querySelector("#new-user-input input").value;
+        var pass = document.querySelector("#password input").value;
+        var passRepeat = document.querySelector("#password-repeat input").value;
+        var domain = $("#manage-btn-control #new-user-input #domain-selection .dropdown-menu a").html();
+        $.ajax({
+            type: "post",
+            url: "/users/create",
+            dataType: "json",
+            data: { username: username, pass: pass, passRepeat: passRepeat, domain: domain },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log("Error ! " + errorThrown);
+            },
+            success: function (data, textStatus, jqXHR) {
+                document.querySelector("#errorText").innerHTML = "&nbsp;&nbsp;&nbsp;" + data.message;
+                document.querySelector("#errorAddingUser").style.display = "block";
             }
         });
     };
