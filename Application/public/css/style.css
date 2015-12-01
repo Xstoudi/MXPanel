@@ -179,3 +179,10 @@ header .btn-primary{
     display: block;
     margin: 0 0 0 auto;
 }
+
+#logs-list {
+    width: 60%;
+    margin: 0 auto;
+    background: #F9F6FF;
+    box-shadow: 3px 3px 3px 2px #ccc;
+}
