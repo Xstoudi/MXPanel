@@ -185,4 +185,5 @@ header .btn-primary{
     margin: 0 auto;
     background: #F9F6FF;
     box-shadow: 3px 3px 3px 2px #ccc;
+    padding: 5px 10px;
 }
