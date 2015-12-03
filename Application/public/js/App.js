@@ -13,6 +13,9 @@ ngApp.config(function ($routeProvider) {
         .when("/logs", {
         templateUrl: "/logs"
     })
+        .when("/domains", {
+        templateUrl: "/domains"
+    })
         .otherwise("/login");
 })
     .controller("loginController", function ($scope, $location, $window) {
