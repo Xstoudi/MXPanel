@@ -56,6 +56,8 @@ function appMain(){
 	httpServer.post("/users/create", Routing.Users.post);
 	
 	httpServer.get("/logs", Routing.Logs.get);
+	
+	httpServer.get("/domains", Routing.Domains.get);
 			
 	httpServer.listen(Configuration.getHttpPort(), () => {
 		Logger.log(`Listen for HTTP requests on ${Configuration.getHttpPort()}`)
