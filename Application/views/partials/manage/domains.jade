@@ -1,0 +1,35 @@
+div(ng-controller="usersController")
+    header
+        nav(class="navbar navbar-default navbar-inverse navbar-fixed-top")
+            div(class="container")
+                ul(class="nav navbar-nav")
+                    li
+                        a(href="#/overview") Overview
+                    li
+                        a(href="#/users") User management
+                    li
+                        a(href="#/logs") Logs
+                    li(class="active")
+                        a(href="#/users") User management
+                    div(id="logout-button")
+                        button(class="btn btn-danger" ng-click="logout();") Logout
+    div(id="user-list" class="list-group")
+        h2 Users List
+        div(class="list-group-item")
+            span(href="#") idleweiss.ch
+            button(class="btn btn-danger" ng-click!="deleteUser(" + users[i].id + ")")
+                i(class="fa fa-trash")
+        div(class="list-group-item")
+            span(href="#") divtec.ch
+            button(class="btn btn-danger" ng-click!="deleteUser(" + users[i].id + ")")
+                i(class="fa fa-trash")
+        
+    div(id="manage-btn-control")
+        h2 Add an user
+        div(class="input-group" id="new-domain")
+            input(type="text" class="form-control" placeholder="Username")
+            
+        button(class="btn btn-success" ng-click="createUser();") Add
+        
+    script(src="../vendors/jquery.js")
+    script(src="../vendors\bootstrap-3.3.5-dist\bootstrap-3.3.5-dist\js\bootstrap.min.js")
