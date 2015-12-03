@@ -191,7 +191,8 @@ header .btn-primary{
 }
 
 #logs-list {
-    width: 60%;
+    width: 90%;
+    max-width: 950px;
     margin: 0 auto;
     background: #F9F6FF;
     box-shadow: 3px 3px 3px 2px #ccc;
