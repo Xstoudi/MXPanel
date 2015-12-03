@@ -10,26 +10,26 @@ div(ng-controller="usersController")
                     li
                         a(href="#/logs") Logs
                     li(class="active")
-                        a(href="#/users") User management
+                        a(href="#/domains") Domains
                     div(id="logout-button")
-                        button(class="btn btn-danger" ng-click="logout();") Logout
-    div(id="user-list" class="list-group")
-        h2 Users List
+                        button(class="btn btn-danger") Logout
+    div(id="domains-list" class="list-group")
+        h2 Domains list
         div(class="list-group-item")
             span(href="#") idleweiss.ch
-            button(class="btn btn-danger" ng-click!="deleteUser(" + users[i].id + ")")
+            button(class="btn btn-danger")
                 i(class="fa fa-trash")
         div(class="list-group-item")
             span(href="#") divtec.ch
-            button(class="btn btn-danger" ng-click!="deleteUser(" + users[i].id + ")")
+            button(class="btn btn-danger")
                 i(class="fa fa-trash")
         
-    div(id="manage-btn-control")
-        h2 Add an user
+    div(id="domains-btn-control")
+        h2 Add a domain
         div(class="input-group" id="new-domain")
-            input(type="text" class="form-control" placeholder="Username")
+            input(type="text" class="form-control" placeholder="example.com")
             
-        button(class="btn btn-success" ng-click="createUser();") Add
+        button(class="btn btn-success") Add
         
     script(src="../vendors/jquery.js")
     script(src="../vendors\bootstrap-3.3.5-dist\bootstrap-3.3.5-dist\js\bootstrap.min.js")

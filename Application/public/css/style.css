@@ -99,11 +99,13 @@ header .btn-primary{
     box-shadow: 3px 3px 3px #ccc;
 }
 
-#manage-btn-control .input-group{
+#manage-btn-control .input-group,
+#domains-btn-control .input-group{
     margin: 10px 0;
 }
 
-#manage-btn-control {
+#manage-btn-control,
+#domains-btn-control {
     margin: 20px 50px 10px auto;
     max-width: 600px;
     background: #F9F6FF;
@@ -114,7 +116,8 @@ header .btn-primary{
     vertical-align: middle;
 }
 
-#manage-btn-control #new-user-input{
+#manage-btn-control #new-user-input
+#domains-btn-control #new-domain{
     width: 100%;
 }
 
@@ -124,11 +127,13 @@ header .btn-primary{
     float: left;
 }
 
-#manage-btn-control h2{
+#manage-btn-control h2,
+#domains-btn-control h2{
     font-size: 150%;
 }
 
-#manage-btn-control button{
+#manage-btn-control button,
+#domains-btn-control button{
     margin: 10px 0 0 auto;
     display: block;
     width: 70px;
@@ -147,7 +152,8 @@ header .btn-primary{
     margin: 0;
 }
 
-#user-list{
+#user-list,
+#domains-list{
     overflow: auto;
     display: block;
     background: #F9F6FF;
@@ -161,21 +167,25 @@ header .btn-primary{
     vertical-align: middle;
 }
 
-#user-list h2{
+#user-list h2,
+#domains-list h2{
     font-size: 150%;
 }
 
-#user-list a{
+#user-list a,
+#domains-list a{
     width: 90%;
 }
 
-#user-list .list-group-item span{
+#user-list .list-group-item span,
+#domains-list .list-group-item span{
     display: block;
     width: 90%;
     float: left;
 }
 
-#user-list .list-group-item button{
+#user-list .list-group-item button,
+#domains-list .list-group-item button{
     display: block;
     margin: 0 0 0 auto;
 }
