@@ -99,6 +99,7 @@ export namespace Routing{
 			if((<any>req.session).logged) {
 				Database.deleteUser(req.params.id, () => {
 					res.status(200).send({});
+					Logger.log(`${req.ip} deleted user N°${req.params.id}`);
 				});
 
 			}else
@@ -117,6 +118,7 @@ export namespace Routing{
 							if(domain != undefined && domain != ""){
 								Database.createUser(domain, username, pass, (message: string) => {
 									res.status(200).send({message: message});
+									Logger.log(`${req.ip} created user ${username}@${domain}`);
 								})
 							}else{
 								res.status(200).send({message: "Please select a valid domain"})
@@ -166,6 +168,7 @@ export namespace Routing{
 		export function _delete(req: express.Request, res: express.Response){
 			if((<any>req.session).logged) {
 				Database.deleteDomain(req.params.id, () => {
+					Logger.log(`${req.ip} deleted domain N°${req.params.id}`);
 					res.status(200).send({});
 				});
 			}else
@@ -176,7 +179,8 @@ export namespace Routing{
 				let domain = req.body.domain;
 				if(domain != undefined && domain != ""){
 					Database.createDomain(domain, (message: string) => {
-						res.status(200).send({message: message});
+						res.status(200).send({message: message});		
+						Logger.log(`${req.ip} created domain ${domain}`);
 					})
 				}else
 					res.status(200).send({message: "Please type a domain"})

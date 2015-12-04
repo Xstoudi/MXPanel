@@ -111,6 +111,7 @@ var Routing;
             if (req.session.logged) {
                 Database_1["default"].deleteUser(req.params.id, function () {
                     res.status(200).send({});
+                    Logger_1["default"].log(req.ip + " deleted user N\u00B0" + req.params.id);
                 });
             }
             else
@@ -129,6 +130,7 @@ var Routing;
                             if (domain != undefined && domain != "") {
                                 Database_1["default"].createUser(domain, username, pass, function (message) {
                                     res.status(200).send({ message: message });
+                                    Logger_1["default"].log(req.ip + " created user " + username + "@" + domain);
                                 });
                             }
                             else {
@@ -188,6 +190,7 @@ var Routing;
         function _delete(req, res) {
             if (req.session.logged) {
                 Database_1["default"].deleteDomain(req.params.id, function () {
+                    Logger_1["default"].log(req.ip + " deleted domain N\u00B0" + req.params.id);
                     res.status(200).send({});
                 });
             }
@@ -201,6 +204,7 @@ var Routing;
                 if (domain != undefined && domain != "") {
                     Database_1["default"].createDomain(domain, function (message) {
                         res.status(200).send({ message: message });
+                        Logger_1["default"].log(req.ip + " created domain " + domain);
                     });
                 }
                 else
