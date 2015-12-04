@@ -187,3 +187,14 @@ header .btn-primary{
     box-shadow: 3px 3px 3px 2px #ccc;
     padding: 5px 10px;
 }
+#logs-list tbody tr td:first-child, #logs-list thead tr th:first-child{
+    text-align: center;
+}
+#logs-list tbody tr td:last-child, #logs-list thead tr th:last-child{
+    padding-left: 35px;
+}
+#logs-list{
+    max-height: 500px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}

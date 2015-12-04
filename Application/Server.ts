@@ -1,8 +1,9 @@
 import * as express from "express";
 import * as path from "path";
 import * as bodyParser from "body-parser";
-import * as cookieParser from "cookie-parser";
+import * as expressCookieParser from "cookie-parser";
 import * as session from "express-session";
+import * as sio from "socket.io";
 
 import Logger from "./Logger";
 import Configuration from "./Configuration";
@@ -22,6 +23,9 @@ Database.sqlServer.connect((err) => {
 });
 
 function appMain(){
+	
+	let cookieParser = expressCookieParser("PoneyMAgiqueSurRoulettesChromees");
+	
 	let httpServer = express();
 	
 	httpServer.set("views", path.join(__dirname, "views"));
@@ -29,7 +33,7 @@ function appMain(){
   	httpServer.set("view engine", "jade");
   	httpServer.set('trust proxy', 1);
 	  
-	httpServer.use(cookieParser());
+	httpServer.use(cookieParser);
 	httpServer.use(session({
 		secret: "PoneyMagiqueSurRoulettesChromees",
 		saveUninitialized: true,

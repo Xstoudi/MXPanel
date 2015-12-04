@@ -157,13 +157,13 @@ var Routing;
                 fs.readFile("logs.log", function (err, data) {
                     var logs = [];
                     if (!Logger_1["default"].err(err)) {
-                        var lines = data.toString("utf-8").split("\n");
-                        for (var line in lines) {
-                            var compo = line.split(" ");
-                            logs.push({ time: compo[0] + compo[1], message: compo[2] });
+                        var lines = data.toString("utf-8").split("\n").reverse();
+                        for (var i = 1; i < lines.length; ++i) {
+                            var compo = lines[i].split(" ");
+                            logs.push({ time: (compo[0] + " " + compo[1]).replace("[", "").replace("]", ""), message: compo.slice(2, compo.length).join(" ") });
                         }
                     }
-                    res.render("partials/manage/logs", logs);
+                    res.render("partials/manage/logs", { logs: logs });
                 });
             }
             else

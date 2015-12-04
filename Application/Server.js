@@ -1,7 +1,7 @@
 var express = require("express");
 var path = require("path");
 var bodyParser = require("body-parser");
-var cookieParser = require("cookie-parser");
+var expressCookieParser = require("cookie-parser");
 var session = require("express-session");
 var Logger_1 = require("./Logger");
 var Configuration_1 = require("./Configuration");
@@ -17,12 +17,13 @@ Database_1["default"].sqlServer.connect(function (err) {
     appMain();
 });
 function appMain() {
+    var cookieParser = expressCookieParser("PoneyMAgiqueSurRoulettesChromees");
     var httpServer = express();
     httpServer.set("views", path.join(__dirname, "views"));
     httpServer.use(express.static(path.join(__dirname, "public")));
     httpServer.set("view engine", "jade");
     httpServer.set('trust proxy', 1);
-    httpServer.use(cookieParser());
+    httpServer.use(cookieParser);
     httpServer.use(session({
         secret: "PoneyMagiqueSurRoulettesChromees",
         saveUninitialized: true,

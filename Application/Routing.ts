@@ -140,13 +140,13 @@ export namespace Routing{
 				fs.readFile("logs.log", (err, data) => {
 					let logs = [];
 					if(!Logger.err(err)){
-						let lines = data.toString("utf-8").split("\n");
-						for(let line in lines){
-							let compo = line.split(" ");
-							logs.push({time: compo[0] + compo[1], message: compo[2]});
+						let lines = data.toString("utf-8").split("\n").reverse();
+						for(let i = 1; i < lines.length; ++i){
+							let compo = lines[i].split(" ");
+							logs.push({time: (compo[0] + " " + compo[1]).replace("[", "").replace("]", ""), message: compo.slice(2, compo.length).join(" ")});
 						}
 					}
-					res.render("partials/manage/logs", logs);	
+					res.render("partials/manage/logs", {logs: logs});	
 				});
 			}else
 				res.render("partials/login");

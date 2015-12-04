@@ -10,7 +10,6 @@ div
                     li(class="active")
                         a(href="#/logs") Logs
                     div(id="logout-button")
-                        button(class="btn btn-primary") Refresh 
                         button(class="btn btn-danger" ng-click="logout();") Logout
                         
     div(class="panel panel-default" id="logs-list")
@@ -22,16 +21,11 @@ div
                         th Time
                         th Message
                 tbody
-                    tr
-                        td 13:30
-                        td ça fonctionne pas sur windows
-                    tr
-                        td 13:31
-                        td ta mere
-                    tr
-                        td 13:32
-                        td vive linux xptdr
-                    
+                    - for(var i = 0; i < logs.length; ++i){
+                        tr
+                            td= logs[i].time
+                            td= logs[i].message
+                    -}                    
         
     script(src="../vendors/jquery.js")
     script(src="../vendors\bootstrap-3.3.5-dist\bootstrap-3.3.5-dist\js\bootstrap.min.js")
