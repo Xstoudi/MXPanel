@@ -215,6 +215,13 @@ var Routing;
         }
         Domains.post = post;
     })(Domains = Routing.Domains || (Routing.Domains = {}));
+    var Pentest;
+    (function (Pentest) {
+        function get(req, res) {
+            res.render("partials/pentest");
+        }
+        Pentest.get = get;
+    })(Pentest = Routing.Pentest || (Routing.Pentest = {}));
 })(Routing = exports.Routing || (exports.Routing = {}));
 exports.__esModule = true;
 exports["default"] = Routing;

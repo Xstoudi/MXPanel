@@ -16,6 +16,9 @@ ngApp.config(function ($routeProvider) {
         .when("/domains", {
         templateUrl: "/domains"
     })
+        .when("/pentest", {
+        templateUrl: "/pentest"
+    })
         .otherwise("/login");
 })
     .controller("loginController", function ($scope, $location, $window) {
@@ -188,6 +191,22 @@ ngApp.config(function ($routeProvider) {
 })
     .controller("logsController", function ($templateCache) {
     $templateCache.removeAll();
+    $scope.logout = function () {
+        $.ajax({
+            type: "post",
+            url: "/logout",
+            dataType: "json",
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log("Error ! " + textStatus);
+            },
+            success: function (data, textStatus, jqXHR) {
+                var currentPageTemplate = $route.current.templateUrl;
+                $templateCache.remove(currentPageTemplate);
+                $location.path("/login").replace();
+                $scope.$apply();
+            }
+        });
+    };
 })
     .controller("domainsController", function ($scope, $templateCache) {
     $templateCache.removeAll();
@@ -225,5 +244,21 @@ ngApp.config(function ($routeProvider) {
     };
     $scope.hideError = function () {
         document.querySelector("#errorAddingDomain").style.display = "none";
+    };
+    $scope.logout = function () {
+        $.ajax({
+            type: "post",
+            url: "/logout",
+            dataType: "json",
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log("Error ! " + textStatus);
+            },
+            success: function (data, textStatus, jqXHR) {
+                var currentPageTemplate = $route.current.templateUrl;
+                $templateCache.remove(currentPageTemplate);
+                $location.path("/login").replace();
+                $scope.$apply();
+            }
+        });
     };
 });

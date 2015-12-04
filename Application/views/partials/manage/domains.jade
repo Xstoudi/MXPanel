@@ -12,7 +12,7 @@ div(ng-controller="domainsController")
                     li
                         a(href="#/logs") Logs
                     div(id="logout-button")
-                        button(class="btn btn-danger") Logout
+                        button(class="btn btn-danger" ng-click="logout();") Logout
     div(id="domains-list" class="list-group")
         h2 Domains list
         - for(var i = 0; i < domains.length; ++i){
