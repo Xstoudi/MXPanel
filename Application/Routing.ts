@@ -5,6 +5,7 @@ import Database from "./Database";
 import Configuration from "./Configuration";
 
 import * as childProcess from "child_process";
+import * as fs from "fs";
 
 export namespace Routing{
 	export namespace Home{
@@ -135,9 +136,19 @@ export namespace Routing{
 	
 	export namespace Logs{
 		export function get(req: express.Request, res: express.Response){
-			if((<any>req.session).logged) 
-				res.render("partials/manage/logs");	
-			else
+			if((<any>req.session).logged){
+				fs.readFile("logs.log", (err, data) => {
+					let logs = [];
+					if(!Logger.err(err)){
+						let lines = data.toString("utf-8").split("\n");
+						for(let line in lines){
+							let compo = line.split(" ");
+							logs.push({time: compo[0] + compo[1], message: compo[2]});
+						}
+					}
+					res.render("partials/manage/logs", logs);	
+				});
+			}else
 				res.render("partials/login");
 		}
 	}

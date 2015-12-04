@@ -2,6 +2,7 @@ var Logger_1 = require("./Logger");
 var Database_1 = require("./Database");
 var Configuration_1 = require("./Configuration");
 var childProcess = require("child_process");
+var fs = require("fs");
 var Routing;
 (function (Routing) {
     var Home;
@@ -152,8 +153,19 @@ var Routing;
     var Logs;
     (function (Logs) {
         function get(req, res) {
-            if (req.session.logged)
-                res.render("partials/manage/logs");
+            if (req.session.logged) {
+                fs.readFile("logs.log", function (err, data) {
+                    var logs = [];
+                    if (!Logger_1["default"].err(err)) {
+                        var lines = data.toString("utf-8").split("\n");
+                        for (var line in lines) {
+                            var compo = line.split(" ");
+                            logs.push({ time: compo[0] + compo[1], message: compo[2] });
+                        }
+                    }
+                    res.render("partials/manage/logs", logs);
+                });
+            }
             else
                 res.render("partials/login");
         }
