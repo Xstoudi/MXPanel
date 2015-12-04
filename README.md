@@ -22,7 +22,7 @@ A basic web panel to manage Postfix/Dovecot/MySQL installation.
 
 ## Install
 * Start the server with `node Application/Server.js`
-* Edit configurations on "config.json"
+* Edit configurations on `config.json` 
 * Restart server
-* Open your web browser and go on "host:port"
+* Open your web browser and go on `host:port`
 * Enjoy 
