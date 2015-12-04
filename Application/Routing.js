@@ -130,7 +130,7 @@ var Routing;
                             if (domain != undefined && domain != "") {
                                 Database_1["default"].createUser(domain, username, pass, function (message) {
                                     res.status(200).send({ message: message });
-                                    Logger_1["default"].log(req.ip + " created user " + username + "@" + domain);
+                                    Logger_1["default"].log(req.ip + " created user \"" + username + "@" + domain + "\"");
                                 });
                             }
                             else {
@@ -204,7 +204,7 @@ var Routing;
                 if (domain != undefined && domain != "") {
                     Database_1["default"].createDomain(domain, function (message) {
                         res.status(200).send({ message: message });
-                        Logger_1["default"].log(req.ip + " created domain " + domain);
+                        Logger_1["default"].log(req.ip + " created domain \"" + domain + "\"");
                     });
                 }
                 else

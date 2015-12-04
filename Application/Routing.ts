@@ -118,7 +118,7 @@ export namespace Routing{
 							if(domain != undefined && domain != ""){
 								Database.createUser(domain, username, pass, (message: string) => {
 									res.status(200).send({message: message});
-									Logger.log(`${req.ip} created user ${username}@${domain}`);
+									Logger.log(`${req.ip} created user "${username}@${domain}"`);
 								})
 							}else{
 								res.status(200).send({message: "Please select a valid domain"})
@@ -180,7 +180,7 @@ export namespace Routing{
 				if(domain != undefined && domain != ""){
 					Database.createDomain(domain, (message: string) => {
 						res.status(200).send({message: message});		
-						Logger.log(`${req.ip} created domain ${domain}`);
+						Logger.log(`${req.ip} created domain "${domain}"`);
 					})
 				}else
 					res.status(200).send({message: "Please type a domain"})
