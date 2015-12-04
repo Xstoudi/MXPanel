@@ -98,7 +98,9 @@ var Routing;
         function get(req, res) {
             if (req.session.logged) {
                 Database_1["default"].getUsers(function (users) {
-                    res.render("partials/manage/users", { users: users });
+                    Database_1["default"].getDomains(function (domains) {
+                        res.render("partials/manage/users", { users: users, domains: domains });
+                    });
                 });
             }
             else
@@ -174,12 +176,25 @@ var Routing;
     var Domains;
     (function (Domains) {
         function get(req, res) {
-            if (req.session.logged)
-                res.render("partials/manage/domains");
+            if (req.session.logged) {
+                Database_1["default"].getDomains(function (domains) {
+                    res.render("partials/manage/domains", { domains: domains });
+                });
+            }
             else
                 res.render("partials/login");
         }
         Domains.get = get;
+        function _delete(req, res) {
+            if (req.session.logged) {
+                Database_1["default"].deleteDomain(req.params.id, function () {
+                    res.status(200).send({});
+                });
+            }
+            else
+                res.render("partials/login");
+        }
+        Domains._delete = _delete;
     })(Domains = Routing.Domains || (Routing.Domains = {}));
 })(Routing = exports.Routing || (exports.Routing = {}));
 exports.__esModule = true;

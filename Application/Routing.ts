@@ -88,12 +88,13 @@ export namespace Routing{
 		export function get(req: express.Request, res: express.Response){
 			if((<any>req.session).logged) {
 				Database.getUsers((users) => {
-					res.render("partials/manage/users", {users: users});
+					Database.getDomains((domains) => {
+						res.render("partials/manage/users", {users: users, domains: domains});
+					});
 				});
 			}else
 				res.render("partials/login");
 		}
-		
 		export function _delete(req: express.Request, res: express.Response){
 			if((<any>req.session).logged) {
 				Database.deleteUser(req.params.id, () => {
@@ -155,9 +156,19 @@ export namespace Routing{
 	
 	export namespace Domains{
 		export function get(req: express.Request, res: express.Response){
-			if((<any>req.session).logged) 
-				res.render("partials/manage/domains");	
-			else
+			if((<any>req.session).logged) {
+				Database.getDomains((domains) => {
+					res.render("partials/manage/domains", {domains: domains});
+				});
+			}else
+				res.render("partials/login");
+		}
+		export function _delete(req: express.Request, res: express.Response){
+			if((<any>req.session).logged) {
+				Database.deleteDomain(req.params.id, () => {
+					res.status(200).send({});
+				});
+			}else
 				res.render("partials/login");
 		}
 	}

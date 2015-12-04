@@ -15,6 +15,9 @@ export namespace Database{
 		});
 	}
 
+	/*
+		User relative
+	*/
 	export function getUsers(callback: (users) => void){
 		sqlServer.query("SELECT id, email FROM virtual_users", (err, rows, fields) => {
 			if(!Logger.err(err)){
@@ -23,8 +26,17 @@ export namespace Database{
 		});
 	}
 	
+	
 	export function deleteUser(id: number, callback: () => void){
 		sqlServer.query("DELETE FROM virtual_users WHERE id=?", [id], (err, rows, fields) => {
+			if(!Logger.err(err)){
+				callback();
+			}
+		});
+	}
+	
+	export function deleteUserByDomainId(id: number, callback: () => void){
+		sqlServer.query("DELETE FROM virtual_users WHERE domain_id=?", [id], (err, rows, fields) => {
 			if(!Logger.err(err)){
 				callback();
 			}
@@ -63,6 +75,9 @@ export namespace Database{
 		});
 	}
 	
+	/*
+		Domain relative
+	*/
 	export function getDomain(identifier: string | number, callback: (identifier: string | number) => void){
 		sqlServer.query("SELECT " + (typeof identifier === "string" ? "id" : "name") + " FROM virtual_domains WHERE " + (typeof identifier === "string" ? "name" : "id") + "=? LIMIT 1", [identifier], (err, rows, fields) => {
 			if(!Logger.err(err)){
@@ -70,6 +85,22 @@ export namespace Database{
 			}else{
 				callback(undefined);
 			}
+		});
+	}
+	export function getDomains(callback: (domains) => void){
+		sqlServer.query("SELECT id, name FROM virtual_domains", (err, rows, fields) => {
+			if(!Logger.err(err)){
+				callback(rows);
+			}
+		});
+	}
+	export function deleteDomain(id: number, callback: () => void){
+		deleteUserByDomainId(id, () => {
+			sqlServer.query("DELETE FROM virtual_domains WHERE id=?", [id], (err, rows, fields) => {
+				if(!Logger.err(err)){
+					callback();
+				}
+			});
 		});
 	}
 }

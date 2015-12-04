@@ -1,4 +1,4 @@
-div
+div(ng-controller="logsController")
     header
         nav(class="navbar navbar-default navbar-inverse navbar-fixed-top")
             div(class="container")
@@ -7,15 +7,14 @@ div
                         a(href="#/overview") Overview
                     li
                         a(href="#/users") User management
+                    li
+                        a(href="#/domains") Domains management
                     li(class="active")
                         a(href="#/logs") Logs
-                    li
-                        a(href="#/domains") Domains
                     div(id="logout-button")
                         button(class="btn btn-danger" ng-click="logout();") Logout
                         
     div(class="panel panel-default" id="logs-list")
-
             div(class="panel-heading") Recents Logs
             table(class="table")
                 thead

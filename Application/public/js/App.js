@@ -131,6 +131,7 @@ ngApp.config(function ($routeProvider) {
             $("#domain-selection-button").html(linkBis.html());
         });
     });
+    $templateCache.removeAll();
     $scope.logout = function () {
         $.ajax({
             type: "post",
@@ -183,5 +184,26 @@ ngApp.config(function ($routeProvider) {
                 location.reload(true);
             }
         });
+    };
+})
+    .controller("logsController", function ($templateCache) {
+    $templateCache.removeAll();
+})
+    .controller("domainsController", function ($scope, $templateCache) {
+    $templateCache.removeAll();
+    $scope.deleteDomain = function (id) {
+        if (confirm("WARNING ! You are going to delete a domain and all users associed, are you sure ?"))
+            $.ajax({
+                type: "delete",
+                url: "/domains/delete/" + id,
+                dataType: "json",
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log("Error ! " + errorThrown);
+                },
+                success: function (data, textStatus, jqXHR) {
+                    var toRemove = document.querySelector("#domain-" + id);
+                    toRemove.parentNode.removeChild(toRemove);
+                }
+            });
     };
 });

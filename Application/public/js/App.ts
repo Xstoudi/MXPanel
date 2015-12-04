@@ -134,6 +134,8 @@ ngApp.config(($routeProvider) => {
         });
     });
 	
+	$templateCache.removeAll();
+	
 	$scope.logout = () => {
 		$.ajax({
 			type: "post",
@@ -161,7 +163,7 @@ ngApp.config(($routeProvider) => {
 			},
 			success: (data: any, textStatus: string, jqXHR: JQueryXHR) => {
 				let toRemove = document.querySelector(`#user-${id}`);
-				toRemove.parentNode.removeChild(toRemove)
+				toRemove.parentNode.removeChild(toRemove);
 			}
 		});
 	}
@@ -190,5 +192,26 @@ ngApp.config(($routeProvider) => {
 				location.reload(true);
 			}
 		});
+	}
+})
+.controller("logsController", ($templateCache) => {
+	$templateCache.removeAll();
+})
+.controller("domainsController", ($scope, $templateCache) => {
+	$templateCache.removeAll();
+	$scope.deleteDomain = (id: number) => {
+		if(confirm("WARNING ! You are going to delete a domain and all users associed, are you sure ?"))
+			$.ajax({
+				type: "delete",
+				url: `/domains/delete/${id}`,
+				dataType: "json",
+				error: (jqXHR: JQueryXHR, textStatus: string, errorThrown: string) => {
+					console.log("Error ! " + errorThrown);
+				},
+				success: (data: any, textStatus: string, jqXHR: JQueryXHR) => {
+					let toRemove = document.querySelector(`#domain-${id}`);
+					toRemove.parentNode.removeChild(toRemove)
+				}
+			});
 	}
 })

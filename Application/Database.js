@@ -13,6 +13,9 @@ var Database;
         });
     }
     Database.loadDatabaseInfo = loadDatabaseInfo;
+    /*
+        User relative
+    */
     function getUsers(callback) {
         Database.sqlServer.query("SELECT id, email FROM virtual_users", function (err, rows, fields) {
             if (!Logger_1["default"].err(err)) {
@@ -29,6 +32,14 @@ var Database;
         });
     }
     Database.deleteUser = deleteUser;
+    function deleteUserByDomainId(id, callback) {
+        Database.sqlServer.query("DELETE FROM virtual_users WHERE domain_id=?", [id], function (err, rows, fields) {
+            if (!Logger_1["default"].err(err)) {
+                callback();
+            }
+        });
+    }
+    Database.deleteUserByDomainId = deleteUserByDomainId;
     function existsUser(user, callback) {
         Database.sqlServer.query("SELECT email FROM virtual_users WHERE email=?", [user], function (err, rows, fields) {
             if (!Logger_1["default"].err(err)) {
@@ -60,6 +71,9 @@ var Database;
         });
     }
     Database.createUser = createUser;
+    /*
+        Domain relative
+    */
     function getDomain(identifier, callback) {
         Database.sqlServer.query("SELECT " + (typeof identifier === "string" ? "id" : "name") + " FROM virtual_domains WHERE " + (typeof identifier === "string" ? "name" : "id") + "=? LIMIT 1", [identifier], function (err, rows, fields) {
             if (!Logger_1["default"].err(err)) {
@@ -71,6 +85,24 @@ var Database;
         });
     }
     Database.getDomain = getDomain;
+    function getDomains(callback) {
+        Database.sqlServer.query("SELECT id, name FROM virtual_domains", function (err, rows, fields) {
+            if (!Logger_1["default"].err(err)) {
+                callback(rows);
+            }
+        });
+    }
+    Database.getDomains = getDomains;
+    function deleteDomain(id, callback) {
+        deleteUserByDomainId(id, function () {
+            Database.sqlServer.query("DELETE FROM virtual_domains WHERE id=?", [id], function (err, rows, fields) {
+                if (!Logger_1["default"].err(err)) {
+                    callback();
+                }
+            });
+        });
+    }
+    Database.deleteDomain = deleteDomain;
 })(Database = exports.Database || (exports.Database = {}));
 exports.__esModule = true;
 exports["default"] = Database;

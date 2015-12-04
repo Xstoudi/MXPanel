@@ -8,9 +8,9 @@ div(ng-controller="usersController")
                     li(class="active")
                         a(href="#/users") User management
                     li
-                        a(href="#/logs") Logs
+                        a(href="#/domains") Domains management
                     li
-                        a(href="#/domains") Domains
+                        a(href="#/logs") Logs
                     div(id="logout-button")
                         button(class="btn btn-danger" ng-click="logout();") Logout
     div(id="user-list" class="list-group")
@@ -36,10 +36,10 @@ div(ng-controller="usersController")
                     span(class="caret")
                     span(class="sr-only") Toggle Dropdown
                 ul(class="dropdown-menu")
-                    li
-                        a(href="") idleweiss.ch
-                    li
-                        a(href="") divtec.ch
+                    - for(var i = 0; i < domains.length; ++i){
+                        li
+                            a(href="")= domains[i].name
+                    - }
         div(class="input-group" id="password")
             input(type="password" class="form-control" placeholder="Password")
             span(class="input-group-addon")
