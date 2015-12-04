@@ -65,7 +65,7 @@ function appMain(){
 	httpServer.delete("/domains/delete/:id", Routing.Domains._delete);
 	httpServer.post("/domains/create", Routing.Domains.post);
 	
-	httpServer.get("/pentest", Routing.Pentest.get);
+	// httpServer.get("/pentest", Routing.Pentest.get);
 			
 	httpServer.listen(Configuration.getHttpPort(), () => {
 		Logger.log(`Listen for HTTP requests on ${Configuration.getHttpPort()}`)
