@@ -24,10 +24,15 @@ div(ng-controller="domainsController")
         
     div(id="domains-btn-control")
         h2 Add a domain
+        div(id="errorAddingDomain" ng-click="hideError();" class="alert alert-warning alert-dismissible" role="alert" style="display: none;")
+            button(type="button" class="alert close" aria-label="Close")
+                span(aria-hidden="true") &times;
+            strong Warning!
+            span(id="errorText")
         div(class="input-group" id="new-domain")
             input(type="text" class="form-control" placeholder="example.com")
             
-        button(class="btn btn-success") Add
+        button(class="btn btn-success" ng-click="createDomain()") Add
 
     script(src="../vendors/jquery.js")
     script(src="../vendors\bootstrap-3.3.5-dist\bootstrap-3.3.5-dist\js\bootstrap.min.js")

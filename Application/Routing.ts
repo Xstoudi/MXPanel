@@ -171,6 +171,18 @@ export namespace Routing{
 			}else
 				res.render("partials/login");
 		}
+		export function post(req: express.Request, res: express.Response){
+			if((<any>req.session).logged) {
+				let domain = req.body.domain;
+				if(domain != undefined && domain != ""){
+					Database.createDomain(domain, (message: string) => {
+						res.status(200).send({message: message});
+					})
+				}else
+					res.status(200).send({message: "Please type a domain"})
+			}else
+				res.render("partials/login");
+		}
 	}
 }
 export default Routing;

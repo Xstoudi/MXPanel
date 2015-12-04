@@ -206,4 +206,24 @@ ngApp.config(function ($routeProvider) {
                 }
             });
     };
+    $scope.createDomain = function () {
+        var domain = document.querySelector("#new-domain input").value;
+        $.ajax({
+            type: "post",
+            url: "/domains/create",
+            dataType: "json",
+            data: { domain: domain },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log("Error ! " + errorThrown);
+            },
+            success: function (data, textStatus, jqXHR) {
+                document.querySelector("#errorText").innerHTML = "&nbsp;&nbsp;&nbsp;" + data.message;
+                document.querySelector("#errorAddingDomain").style.display = "block";
+                location.reload(true);
+            }
+        });
+    };
+    $scope.hideError = function () {
+        document.querySelector("#errorAddingDomain").style.display = "none";
+    };
 });

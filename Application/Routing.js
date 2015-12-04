@@ -195,6 +195,21 @@ var Routing;
                 res.render("partials/login");
         }
         Domains._delete = _delete;
+        function post(req, res) {
+            if (req.session.logged) {
+                var domain = req.body.domain;
+                if (domain != undefined && domain != "") {
+                    Database_1["default"].createDomain(domain, function (message) {
+                        res.status(200).send({ message: message });
+                    });
+                }
+                else
+                    res.status(200).send({ message: "Please type a domain" });
+            }
+            else
+                res.render("partials/login");
+        }
+        Domains.post = post;
     })(Domains = Routing.Domains || (Routing.Domains = {}));
 })(Routing = exports.Routing || (exports.Routing = {}));
 exports.__esModule = true;

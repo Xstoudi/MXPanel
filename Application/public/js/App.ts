@@ -214,4 +214,27 @@ ngApp.config(($routeProvider) => {
 				}
 			});
 	}
+	
+	$scope.createDomain = () => {
+		let domain = (<HTMLInputElement>document.querySelector("#new-domain input")).value;
+		
+		$.ajax({
+			type: "post",
+			url: `/domains/create`,
+			dataType: "json",
+			data: {domain: domain},
+			error: (jqXHR: JQueryXHR, textStatus: string, errorThrown: string) => {
+				console.log("Error ! " + errorThrown);
+			},
+			success: (data: any, textStatus: string, jqXHR: JQueryXHR) => {
+				(<HTMLElement>document.querySelector("#errorText")).innerHTML = `&nbsp;&nbsp;&nbsp;${data.message}`;
+				(<HTMLElement>document.querySelector("#errorAddingDomain")).style.display = "block";
+				location.reload(true);
+			}
+		});
+	}
+	
+	$scope.hideError = () => {
+		(<HTMLElement>document.querySelector("#errorAddingDomain")).style.display = "none";
+	}
 })

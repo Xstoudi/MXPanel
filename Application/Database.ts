@@ -64,7 +64,6 @@ export namespace Database{
 					return;
 				}
 				let email = `${user}@${domain}`;
-				console.log(domainId);
 				let request = "INSERT INTO virtual_users (domain_id, password, email) VALUES (?, ENCRYPT(?, CONCAT('$6$', SUBSTRING(SHA(RAND()), -16))), ?)";
 				sqlServer.query(request, [domainId, password, email], (err, rows, fields) => {
 					if(!Logger.err(err)){
@@ -99,6 +98,27 @@ export namespace Database{
 			sqlServer.query("DELETE FROM virtual_domains WHERE id=?", [id], (err, rows, fields) => {
 				if(!Logger.err(err)){
 					callback();
+				}
+			});
+		});
+	}
+	export function existsDomain(domain: string, callback: (exists: boolean) => void){
+		sqlServer.query(`SELECT name FROM virtual_domains WHERE name=?`, [domain], (err, rows, fields) => {
+			if(!Logger.err(err)){
+				callback(rows.length > 0);
+			}
+		});
+	}
+	export function createDomain(domain: string, callback: (result) => void){	
+		existsDomain(domain, (exists) => {
+			if(exists){
+				callback("Domain already exists");
+				return;
+			}
+			let request = "INSERT INTO virtual_domains (name) VALUES (?)";
+			sqlServer.query(request, [domain], (err, rows, fields) => {
+				if(!Logger.err(err)){
+					callback("Domain created");
 				}
 			});
 		});
