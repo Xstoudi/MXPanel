@@ -66,7 +66,7 @@ export namespace Database{
 	export function getDomain(identifier: string | number, callback: (identifier: string | number) => void){
 		sqlServer.query("SELECT " + (typeof identifier === "string" ? "id" : "name") + " FROM virtual_domains WHERE " + (typeof identifier === "string" ? "name" : "id") + "=? LIMIT 1", [identifier], (err, rows, fields) => {
 			if(!Logger.err(err)){
-				callback(rows[0]);
+				callback(rows[0].id);
 			}else{
 				callback(undefined);
 			}

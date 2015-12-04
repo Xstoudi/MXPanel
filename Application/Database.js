@@ -63,7 +63,7 @@ var Database;
     function getDomain(identifier, callback) {
         Database.sqlServer.query("SELECT " + (typeof identifier === "string" ? "id" : "name") + " FROM virtual_domains WHERE " + (typeof identifier === "string" ? "name" : "id") + "=? LIMIT 1", [identifier], function (err, rows, fields) {
             if (!Logger_1["default"].err(err)) {
-                callback(rows[0]);
+                callback(rows[0].id);
             }
             else {
                 callback(undefined);

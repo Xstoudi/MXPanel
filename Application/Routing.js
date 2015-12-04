@@ -171,6 +171,16 @@ var Routing;
         }
         Logs.get = get;
     })(Logs = Routing.Logs || (Routing.Logs = {}));
+    var Domains;
+    (function (Domains) {
+        function get(req, res) {
+            if (req.session.logged)
+                res.render("partials/manage/domains");
+            else
+                res.render("partials/login");
+        }
+        Domains.get = get;
+    })(Domains = Routing.Domains || (Routing.Domains = {}));
 })(Routing = exports.Routing || (exports.Routing = {}));
 exports.__esModule = true;
 exports["default"] = Routing;
