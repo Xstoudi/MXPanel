@@ -197,7 +197,7 @@ ngApp.config(($routeProvider) => {
 		});
 	}
 })
-.controller("logsController", ($templateCache) => {
+.controller("logsController", ($scope, $templateCache, $location, $route) => {
 	$templateCache.removeAll();
 	
 	$scope.logout = () => {
@@ -217,7 +217,7 @@ ngApp.config(($routeProvider) => {
 		});
 	}
 })
-.controller("domainsController", ($scope, $templateCache) => {
+.controller("domainsController", ($scope, $templateCache, $location, $route) => {
 	$templateCache.removeAll();
 	$scope.deleteDomain = (id: number) => {
 		if(confirm("WARNING ! You are going to delete a domain and all users associed, are you sure ?"))
@@ -257,6 +257,7 @@ ngApp.config(($routeProvider) => {
 	$scope.hideError = () => {
 		(<HTMLElement>document.querySelector("#errorAddingDomain")).style.display = "none";
 	}
+	
 	$scope.logout = () => {
 		$.ajax({
 			type: "post",

@@ -189,7 +189,7 @@ ngApp.config(function ($routeProvider) {
         });
     };
 })
-    .controller("logsController", function ($templateCache) {
+    .controller("logsController", function ($scope, $templateCache, $location, $route) {
     $templateCache.removeAll();
     $scope.logout = function () {
         $.ajax({
@@ -208,7 +208,7 @@ ngApp.config(function ($routeProvider) {
         });
     };
 })
-    .controller("domainsController", function ($scope, $templateCache) {
+    .controller("domainsController", function ($scope, $templateCache, $location, $route) {
     $templateCache.removeAll();
     $scope.deleteDomain = function (id) {
         if (confirm("WARNING ! You are going to delete a domain and all users associed, are you sure ?"))
