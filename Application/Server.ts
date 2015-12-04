@@ -3,7 +3,6 @@ import * as path from "path";
 import * as bodyParser from "body-parser";
 import * as expressCookieParser from "cookie-parser";
 import * as session from "express-session";
-import * as sio from "socket.io";
 
 import Logger from "./Logger";
 import Configuration from "./Configuration";

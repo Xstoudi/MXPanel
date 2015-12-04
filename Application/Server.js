@@ -46,7 +46,7 @@ function appMain() {
     httpServer.get("/domains", Routing_1["default"].Domains.get);
     httpServer.delete("/domains/delete/:id", Routing_1["default"].Domains._delete);
     httpServer.post("/domains/create", Routing_1["default"].Domains.post);
-    httpServer.get("/pentest", Routing_1["default"].Pentest.get);
+    // httpServer.get("/pentest", Routing.Pentest.get);
     httpServer.listen(Configuration_1["default"].getHttpPort(), function () {
         Logger_1["default"].log("Listen for HTTP requests on " + Configuration_1["default"].getHttpPort());
     });
