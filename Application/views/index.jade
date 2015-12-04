@@ -5,20 +5,20 @@ html(lang="fr" ng-app="mxpanel")
         meta(http-equiv="X-UA-Compatible" content="IE=edge")
         meta(name="viewport" content="wi dth=device-width, initial-scale=1")
         title MXPanel
-        link(href="vendors/bootstrap-3.3.5-dist/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet")
-        link(href="vendors/font-awesome-4.5.0/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet")
-        link(href="css/style.css" rel="stylesheet")
+        link(href="/css/bootstrap.min.css" rel="stylesheet")
+        link(href="/css/font-awesome.min.css" rel="stylesheet")
+        link(href="/css/style.css" rel="stylesheet")
         
-        script(src="https://code.jquery.com/jquery-2.1.4.js")
+        script(src="/js/jquery.js")
         script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js")
         script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-route.js")
-        script(src="vendors/bootstrap-3.3.5-dist/bootstrap-3.3.5-dist/js/bootstrap.min.js")
-        script(src="js/App.js")
+        script(src="/js/bootstrap.min.js")
+        script(src="/js/App.js")
     body                                         
         div(ng-view)
         footer
             div(class="text-container")
-                yp
+                p
                     | Made with 
                     span(class="red") ♥ 
                     | by Xavier Stouder and Luca Laissue
