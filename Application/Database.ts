@@ -25,8 +25,8 @@ export namespace Database{
 			}
 		});
 	}
-	
-	
+
+
 	export function deleteUser(id: number, callback: () => void){
 		sqlServer.query("DELETE FROM virtual_users WHERE id=?", [id], (err, rows, fields) => {
 			if(!Logger.err(err)){
@@ -34,7 +34,7 @@ export namespace Database{
 			}
 		});
 	}
-	
+
 	export function deleteUserByDomainId(id: number, callback: () => void){
 		sqlServer.query("DELETE FROM virtual_users WHERE domain_id=?", [id], (err, rows, fields) => {
 			if(!Logger.err(err)){
@@ -42,7 +42,7 @@ export namespace Database{
 			}
 		});
 	}
-	
+
 	export function existsUser(user: string, callback: (exists: boolean) => void){
 		sqlServer.query(`SELECT email FROM virtual_users WHERE email=?`, [user], (err, rows, fields) => {
 			if(!Logger.err(err)){
@@ -50,14 +50,14 @@ export namespace Database{
 			}
 		});
 	}
-	
+
 	export function createUser(domain: string, user: string, password: string, callback: (result) => void){
 		getDomain(domain, (domainId) => {
 			if(domainId == undefined){
 				callback("Domain doesn't exist")
 				return;
 			}
-				
+
 			existsUser(user, (exists) => {
 				if(exists){
 					callback("User already exists");
@@ -73,7 +73,7 @@ export namespace Database{
 			});
 		});
 	}
-	
+
 	/*
 		Domain relative
 	*/
@@ -109,7 +109,7 @@ export namespace Database{
 			}
 		});
 	}
-	export function createDomain(domain: string, callback: (result) => void){	
+	export function createDomain(domain: string, callback: (result) => void){
 		existsDomain(domain, (exists) => {
 			if(exists){
 				callback("Domain already exists");

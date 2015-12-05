@@ -16,9 +16,6 @@ ngApp.config(function ($routeProvider) {
         .when("/domains", {
         templateUrl: "/domains"
     })
-        .when("/pentest", {
-        templateUrl: "/pentest"
-    })
         .otherwise("/login");
 })
     .controller("loginController", function ($scope, $location, $window) {
@@ -74,7 +71,6 @@ ngApp.config(function ($routeProvider) {
     $scope.refreshStatus = function () {
         var refreshing = [true, true];
         document.querySelector("#refreshSpin").className += " fa-spin";
-        // Postfix
         $.ajax({
             type: "get",
             url: "/server/postfix",
@@ -88,7 +84,6 @@ ngApp.config(function ($routeProvider) {
                 setTimeout(update, 950);
             }
         });
-        // Dovecot
         $.ajax({
             type: "get",
             url: "/server/dovecot",

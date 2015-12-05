@@ -15,7 +15,7 @@ export namespace Routing{
 	}
 	export namespace Login{
 		export function get(req: express.Request, res: express.Response){
-			if((<any>req.session).logged) 
+			if((<any>req.session).logged)
 				res.render("partials/manage/overview");
 			else
 				res.render("partials/login");
@@ -24,8 +24,8 @@ export namespace Routing{
 			if(req.body.password === Configuration.getPanelPassword()){
 				let sess: any = req.session;
 				sess.logged = true;
-				
-				res.status(200).send({result: "ok"});				
+
+				res.status(200).send({result: "ok"});
 				Logger.log(`${req.ip} logged on panel`)
 			}else{
 				res.status(200).send({result: "nope"});
@@ -41,8 +41,8 @@ export namespace Routing{
 	}
 	export namespace Overview{
 		export function get(req: express.Request, res: express.Response){
-			if((<any>req.session).logged) 
-				res.render("partials/manage/overview");	
+			if((<any>req.session).logged)
+				res.render("partials/manage/overview");
 			else
 				res.render("partials/login");
 		}
@@ -56,7 +56,7 @@ export namespace Routing{
 			else
 				res.status(403).send({please: "go hell"});
 		}
-		
+
 		// Post command (start, reboot, stop)
 		export function post(req: express.Request, res: express.Response){
 			if((<any>req.session).logged && (req.params.server == "dovecot" || req.params.server == "postfix")){
@@ -82,7 +82,7 @@ export namespace Routing{
 				}
 			}else
 				res.status(403).send({please: "go hell"});
-		}	
+		}
 	}
 	export namespace Users{
 		export function get(req: express.Request, res: express.Response){
@@ -111,7 +111,7 @@ export namespace Routing{
 				let pass = req.body.pass;
 				let passRepeat = req.body.passRepeat;
 				let domain = req.body.domain;
-				
+
 				if(username != undefined && username != ""){
 					if(pass != undefined && pass != ""){
 						if(pass === passRepeat){
@@ -136,11 +136,11 @@ export namespace Routing{
 				res.render("partials/login");
 		}
 	}
-	
+
 	export namespace Logs{
 		export function get(req: express.Request, res: express.Response){
 			if((<any>req.session).logged){
-				fs.readFile("logs.log", (err, data) => {
+				fs.readFile("../logs.log", (err, data) => {
 					let logs = [];
 					if(!Logger.err(err)){
 						let lines = data.toString("utf-8").split("\n").reverse();
@@ -149,13 +149,13 @@ export namespace Routing{
 							logs.push({time: (compo[0] + " " + compo[1]).replace("[", "").replace("]", ""), message: compo.slice(2, compo.length).join(" ")});
 						}
 					}
-					res.render("partials/manage/logs", {logs: logs});	
+					res.render("partials/manage/logs", {logs: logs});
 				});
 			}else
 				res.render("partials/login");
 		}
 	}
-	
+
 	export namespace Domains{
 		export function get(req: express.Request, res: express.Response){
 			if((<any>req.session).logged) {
@@ -179,18 +179,13 @@ export namespace Routing{
 				let domain = req.body.domain;
 				if(domain != undefined && domain != ""){
 					Database.createDomain(domain, (message: string) => {
-						res.status(200).send({message: message});		
+						res.status(200).send({message: message});
 						Logger.log(`${req.ip} created domain "${domain}"`);
 					})
 				}else
 					res.status(200).send({message: "Please type a domain"})
 			}else
 				res.render("partials/login");
-		}
-	}
-	export namespace Pentest{
-		export function get(req: express.Request, res: express.Response){
-			res.render("partials/pentest");	
 		}
 	}
 }
