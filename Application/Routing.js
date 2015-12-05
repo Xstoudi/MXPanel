@@ -158,7 +158,7 @@ var Routing;
     (function (Logs) {
         function get(req, res) {
             if (req.session.logged) {
-                fs.readFile("logs.log", function (err, data) {
+                fs.readFile("../logs.log", function (err, data) {
                     var logs = [];
                     if (!Logger_1["default"].err(err)) {
                         var lines = data.toString("utf-8").split("\n").reverse();

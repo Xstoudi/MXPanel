@@ -140,7 +140,7 @@ export namespace Routing{
 	export namespace Logs{
 		export function get(req: express.Request, res: express.Response){
 			if((<any>req.session).logged){
-				fs.readFile("logs.log", (err, data) => {
+				fs.readFile("../logs.log", (err, data) => {
 					let logs = [];
 					if(!Logger.err(err)){
 						let lines = data.toString("utf-8").split("\n").reverse();
