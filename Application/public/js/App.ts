@@ -14,11 +14,8 @@ ngApp.config(($routeProvider) => {
 			templateUrl: "/logs"
 		})
 		.when("/domains", {
-			templateUrl: "/domains"	
+			templateUrl: "/domains"
 		})
-		/*.when("/pentest", {
-			templateUrl: "/pentest"
-		})*/
 		.otherwise("/login");
 })
 .controller("loginController", ($scope, $location, $window) => {
@@ -39,9 +36,9 @@ ngApp.config(($routeProvider) => {
 				}
 			}else{
 				(<HTMLElement>document.querySelector("#badPasswordAlert")).style.display = "block";
-			}	
+			}
 		}
-		
+
 		let password: string = $scope.password;
 		$.ajax({
 			type: "post",
@@ -70,7 +67,7 @@ ngApp.config(($routeProvider) => {
 			}
 		});
 	}
-	
+
 	$scope.refreshStatus = () => {
 		let refreshing = [true, true];
 		document.querySelector("#refreshSpin").className += " fa-spin";
@@ -88,7 +85,7 @@ ngApp.config(($routeProvider) => {
 				setTimeout(update, 950);
 			}
 		});
-		
+
 		// Dovecot
 		$.ajax({
 			type: "get",
@@ -111,7 +108,7 @@ ngApp.config(($routeProvider) => {
 			}
 		}
 	}
-	
+
 	$scope.sendCommand = (command: string, server: string) => {
 		$.ajax({
 			type: "post",
@@ -125,7 +122,7 @@ ngApp.config(($routeProvider) => {
 			}
 		});
 	}
-	
+
 	$scope.refreshStatus();
 })
 .controller("usersController", ($scope, $location, $route, $templateCache) => {
@@ -136,9 +133,9 @@ ngApp.config(($routeProvider) => {
             $("#domain-selection-button").html(linkBis.html())
         });
     });
-	
+
 	$templateCache.removeAll();
-	
+
 	$scope.logout = () => {
 		$.ajax({
 			type: "post",
@@ -155,7 +152,7 @@ ngApp.config(($routeProvider) => {
 			}
 		});
 	}
-	
+
 	$scope.deleteUser = (id: number) => {
 		$.ajax({
 			type: "delete",
@@ -170,17 +167,17 @@ ngApp.config(($routeProvider) => {
 			}
 		});
 	}
-	
+
 	$scope.hideError = () => {
 		(<HTMLElement>document.querySelector("#errorAddingUser")).style.display = "none";
 	}
-	
+
 	$scope.createUser = () => {
 		let username = (<HTMLInputElement>document.querySelector("#new-user-input input")).value;
 		let pass = (<HTMLInputElement>document.querySelector("#password input")).value;
 		let passRepeat = (<HTMLInputElement>document.querySelector("#password-repeat input")).value;
 		let domain = $("#manage-btn-control #new-user-input #domain-selection .dropdown-menu a").html();
-		
+
 		$.ajax({
 			type: "post",
 			url: `/users/create`,
@@ -199,7 +196,7 @@ ngApp.config(($routeProvider) => {
 })
 .controller("logsController", ($scope, $templateCache, $location, $route) => {
 	$templateCache.removeAll();
-	
+
 	$scope.logout = () => {
 		$.ajax({
 			type: "post",
@@ -234,10 +231,10 @@ ngApp.config(($routeProvider) => {
 				}
 			});
 	}
-	
+
 	$scope.createDomain = () => {
 		let domain = (<HTMLInputElement>document.querySelector("#new-domain input")).value;
-		
+
 		$.ajax({
 			type: "post",
 			url: `/domains/create`,
@@ -253,11 +250,11 @@ ngApp.config(($routeProvider) => {
 			}
 		});
 	}
-	
+
 	$scope.hideError = () => {
 		(<HTMLElement>document.querySelector("#errorAddingDomain")).style.display = "none";
 	}
-	
+
 	$scope.logout = () => {
 		$.ajax({
 			type: "post",
