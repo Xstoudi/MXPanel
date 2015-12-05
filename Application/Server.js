@@ -1,3 +1,4 @@
+"use strict";
 var express = require("express");
 var path = require("path");
 var bodyParser = require("body-parser");
@@ -31,7 +32,6 @@ function appMain() {
     }));
     httpServer.use(bodyParser.json());
     httpServer.use(bodyParser.urlencoded({ extended: true }));
-    // Routes
     httpServer.get("/", Routing_1["default"].Home.get);
     httpServer.get("/login", Routing_1["default"].Login.get);
     httpServer.post("/login", Routing_1["default"].Login.post);
@@ -46,7 +46,6 @@ function appMain() {
     httpServer.get("/domains", Routing_1["default"].Domains.get);
     httpServer.delete("/domains/delete/:id", Routing_1["default"].Domains._delete);
     httpServer.post("/domains/create", Routing_1["default"].Domains.post);
-    // httpServer.get("/pentest", Routing.Pentest.get);
     httpServer.listen(Configuration_1["default"].getHttpPort(), function () {
         Logger_1["default"].log("Listen for HTTP requests on " + Configuration_1["default"].getHttpPort());
     });

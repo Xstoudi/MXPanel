@@ -7,9 +7,9 @@ let JSONFormatter = require("simple-json-formatter");
 import Logger from "./Logger";
 
 namespace Configuration{
-	
+
 	let configPath = `${__dirname}/../config.json`;
-	
+
 	interface IConfiguration{
 		sqlHost: string,
 		sqlUser: string,
@@ -18,18 +18,18 @@ namespace Configuration{
 		httpPort: number,
 		panelPassword: string
 	}
-	
+
 	let defaultConfig: IConfiguration = {
 		sqlHost: "localhost",
 		sqlUser: "root",
 		sqlPass: "",
 		sqlDatabase: "hermes",
 		httpPort: 3000,
-		panelPassword: "PoneyMagique"	
+		panelPassword: "PoneyMagique"
 	}
 
 	let config: IConfiguration = undefined;
-	
+
 	export function loadConfiguration(){
 		Logger.log("Loading configuration...");
 		let exists = fs.existsSync(configPath);
@@ -40,14 +40,14 @@ namespace Configuration{
 
 		readConfig();
 	}
-	
+
 	function writeDefault(){
 		let writeStream = fs.createWriteStream(configPath, {encoding: "utf8"});
 		writeStream.write(JSONFormatter.format(JSON.stringify(defaultConfig)), () => {
 			writeStream.close();
-				
+
 			Logger.log("Default config file wrote, please personalize.");
-			process.exit(1);  
+			process.exit(1);
 		});
 	}
 	function readConfig(){
@@ -55,12 +55,12 @@ namespace Configuration{
 		try {
 			configContent = fs.readFileSync(configPath, {encoding: "utf8"});
 			config = configContent ? JSON.parse(configContent) : defaultConfig;
-			Logger.log("Configuration loaded !")	
+			Logger.log("Configuration loaded !")
 		} catch (err) {
 			Logger.err(err);
 		}
 	}
-	
+
 	// Getters
 	export function getSqlHost(){
 		return config.sqlHost;
