@@ -1,4 +1,3 @@
-"use strict";
 var express = require("express");
 var path = require("path");
 var bodyParser = require("body-parser");
@@ -32,6 +31,7 @@ function appMain() {
     }));
     httpServer.use(bodyParser.json());
     httpServer.use(bodyParser.urlencoded({ extended: true }));
+    // Routes
     httpServer.get("/", Routing_1["default"].Home.get);
     httpServer.get("/login", Routing_1["default"].Login.get);
     httpServer.post("/login", Routing_1["default"].Login.post);

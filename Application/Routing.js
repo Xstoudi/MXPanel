@@ -1,4 +1,3 @@
-"use strict";
 var Logger_1 = require("./Logger");
 var Database_1 = require("./Database");
 var Configuration_1 = require("./Configuration");
@@ -65,6 +64,7 @@ var Routing;
                 res.status(403).send({ please: "go hell" });
         }
         Server.get = get;
+        // Post command (start, reboot, stop)
         function post(req, res) {
             if (req.session.logged && (req.params.server == "dovecot" || req.params.server == "postfix")) {
                 switch (req.params.command) {
@@ -158,7 +158,7 @@ var Routing;
     (function (Logs) {
         function get(req, res) {
             if (req.session.logged) {
-                fs.readFile("../logs.log", function (err, data) {
+                fs.readFile(__dirname + "/logs.log", function (err, data) {
                     var logs = [];
                     if (!Logger_1["default"].err(err)) {
                         var lines = data.toString("utf-8").split("\n").reverse();

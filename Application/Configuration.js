@@ -1,4 +1,4 @@
-"use strict";
+/// <reference path="./../typings/tsd.d.ts" />
 var fs = require("fs");
 var JSONFormatter = require("simple-json-formatter");
 var Logger_1 = require("./Logger");
@@ -43,6 +43,7 @@ var Configuration;
             Logger_1["default"].err(err);
         }
     }
+    // Getters
     function getSqlHost() {
         return config.sqlHost;
     }

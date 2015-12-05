@@ -3,7 +3,7 @@ let Color = require("ansicolors");
 
 export module Logger{
 
-	let logPath = `${__dirname}/../logs.log`;
+	let logPath = `${__dirname}/logs.log`;
 
 	export function log(...params: any[]){
 		let date = new Date();

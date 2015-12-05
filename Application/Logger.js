@@ -1,9 +1,8 @@
-"use strict";
 var fs = require("fs");
 var Color = require("ansicolors");
 var Logger;
 (function (Logger) {
-    var logPath = __dirname + "/../logs.log";
+    var logPath = __dirname + "/logs.log";
     function log() {
         var params = [];
         for (var _i = 0; _i < arguments.length; _i++) {

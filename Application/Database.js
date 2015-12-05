@@ -1,4 +1,3 @@
-"use strict";
 var Logger_1 = require("./Logger");
 var Configuration_1 = require("./Configuration");
 var mysql = require("mysql");
@@ -14,6 +13,9 @@ var Database;
         });
     }
     Database.loadDatabaseInfo = loadDatabaseInfo;
+    /*
+        User relative
+    */
     function getUsers(callback) {
         Database.sqlServer.query("SELECT id, email FROM virtual_users", function (err, rows, fields) {
             if (!Logger_1["default"].err(err)) {
@@ -68,6 +70,9 @@ var Database;
         });
     }
     Database.createUser = createUser;
+    /*
+        Domain relative
+    */
     function getDomain(identifier, callback) {
         Database.sqlServer.query("SELECT " + (typeof identifier === "string" ? "id" : "name") + " FROM virtual_domains WHERE " + (typeof identifier === "string" ? "name" : "id") + "=? LIMIT 1", [identifier], function (err, rows, fields) {
             if (!Logger_1["default"].err(err)) {
