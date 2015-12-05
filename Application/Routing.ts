@@ -188,5 +188,10 @@ export namespace Routing{
 				res.render("partials/login");
 		}
 	}
+	export namespace Pentest{
+		export function get(req: express.Request, res: express.Response){
+			res.render("partials/pentest");	
+		}
+	}
 }
 export default Routing;
