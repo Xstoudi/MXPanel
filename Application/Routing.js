@@ -1,3 +1,4 @@
+"use strict";
 var Logger_1 = require("./Logger");
 var Database_1 = require("./Database");
 var Configuration_1 = require("./Configuration");
@@ -64,7 +65,6 @@ var Routing;
                 res.status(403).send({ please: "go hell" });
         }
         Server.get = get;
-        // Post command (start, reboot, stop)
         function post(req, res) {
             if (req.session.logged && (req.params.server == "dovecot" || req.params.server == "postfix")) {
                 switch (req.params.command) {
@@ -215,6 +215,16 @@ var Routing;
         }
         Domains.post = post;
     })(Domains = Routing.Domains || (Routing.Domains = {}));
+    var Aliases;
+    (function (Aliases) {
+        function get(req, res) {
+            if (req.session.logged)
+                res.render("partials/manage/aliases");
+            else
+                res.render("partials/login");
+        }
+        Aliases.get = get;
+    })(Aliases = Routing.Aliases || (Routing.Aliases = {}));
 })(Routing = exports.Routing || (exports.Routing = {}));
 exports.__esModule = true;
 exports["default"] = Routing;
