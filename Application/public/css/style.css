@@ -100,12 +100,14 @@ header .btn-primary{
 }
 
 #manage-btn-control .input-group,
-#domains-btn-control .input-group{
+#domains-btn-control .input-group,
+#aliases-btn-control .input-group{
     margin: 10px 0;
 }
 
 #manage-btn-control,
-#domains-btn-control {
+#domains-btn-control,
+#aliases-btn-control {
     margin: 20px 50px 10px auto;
     max-width: 600px;
     background: #F9F6FF;
@@ -128,12 +130,14 @@ header .btn-primary{
 }
 
 #manage-btn-control h2,
-#domains-btn-control h2{
+#domains-btn-control h2,
+#aliases-btn-control h2{
     font-size: 150%;
 }
 
 #manage-btn-control button,
-#domains-btn-control button{
+#domains-btn-control button,
+#aliases-btn-control button{
     margin: 10px 0 0 auto;
     display: block;
     width: 70px;
@@ -153,7 +157,8 @@ header .btn-primary{
 }
 
 #user-list,
-#domains-list{
+#domains-list,
+#aliases-list{
     overflow: auto;
     display: block;
     background: #F9F6FF;
