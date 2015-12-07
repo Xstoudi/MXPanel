@@ -188,5 +188,13 @@ export namespace Routing{
 				res.render("partials/login");
 		}
 	}
+	export namespace Aliases{
+		export function get(req: express.Request, res: express.Response){
+			if((<any>req.session).logged)
+				res.render("partials/manage/aliases");
+			else
+				res.render("partials/login");
+		}
+	}
 }
 export default Routing;

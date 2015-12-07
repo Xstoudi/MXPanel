@@ -38,7 +38,7 @@ function appMain(){
 		saveUninitialized: true,
 		resave: false
 	}));
-	httpServer.use(bodyParser.json());
+	//httpServer.use(bodyParser.json());
 	httpServer.use(bodyParser.urlencoded({extended: true}));
 
 	// Routes
