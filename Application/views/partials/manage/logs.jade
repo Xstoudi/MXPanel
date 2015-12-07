@@ -11,6 +11,8 @@ div(ng-controller="logsController")
                         a(href="#/domains") Domains management
                     li(class="active")
                         a(href="#/logs") Logs
+                    li
+                        a(href="#/aliases") Aliases
                     div(id="logout-button")
                         button(class="btn btn-danger" ng-click="logout();") Logout
                         
@@ -28,4 +30,3 @@ div(ng-controller="logsController")
                             td= logs[i].message
                     -}                    
         
-
