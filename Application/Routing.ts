@@ -223,5 +223,10 @@ export namespace Routing{
 				res.render("partials/login");
 		}
 	}
+	export namespace ChangePassword{
+		export function get(req: express.Request, res: express.Response){
+			res.render("partials/change-password");
+		}
+	}
 }
 export default Routing;

@@ -67,6 +67,8 @@ function appMain(){
 	httpServer.get("/aliases", Routing.Aliases.get);
 	httpServer.delete("/aliases/delete/:id", Routing.Aliases._delete);
 	httpServer.post("/aliases/create", Routing.Aliases.post);
+	
+	httpServer.get("/change-password", Routing.ChangePassword.get)
 
 	httpServer.listen(Configuration.getHttpPort(), () => {
 		Logger.log(`Listen for HTTP requests on ${Configuration.getHttpPort()}`)

@@ -257,6 +257,13 @@ var Routing;
         }
         Aliases.post = post;
     })(Aliases = Routing.Aliases || (Routing.Aliases = {}));
+    var ChangePassword;
+    (function (ChangePassword) {
+        function get(req, res) {
+            res.render("partials/change-password");
+        }
+        ChangePassword.get = get;
+    })(ChangePassword = Routing.ChangePassword || (Routing.ChangePassword = {}));
 })(Routing = exports.Routing || (exports.Routing = {}));
 exports.__esModule = true;
 exports["default"] = Routing;
