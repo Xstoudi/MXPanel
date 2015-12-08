@@ -34,7 +34,7 @@ function appMain(){
 
 	httpServer.use(cookieParser);
 	httpServer.use(session({
-		secret: "PoneyMagiqueSurRoulettesChromees",
+		secret: Configuration.getSecretSessionKey(),
 		saveUninitialized: true,
 		resave: false
 	}));

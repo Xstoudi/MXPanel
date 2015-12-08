@@ -25,7 +25,7 @@ function appMain() {
     httpServer.set("trust proxy", Configuration_1["default"].getTrustProxy());
     httpServer.use(cookieParser);
     httpServer.use(session({
-        secret: "PoneyMagiqueSurRoulettesChromees",
+        secret: Configuration_1["default"].getSecretSessionKey(),
         saveUninitialized: true,
         resave: false
     }));

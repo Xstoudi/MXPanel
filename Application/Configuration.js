@@ -13,6 +13,7 @@ var Configuration;
         httpPort: 3000,
         panelPassword: "PoneyMagique",
         trustProxy: 2
+        secretSessionKey: "PoneyMagiqueSurRoulettesChromees"
     };
     var config = undefined;
     function loadConfiguration() {
@@ -73,6 +74,10 @@ var Configuration;
         return config.trustProxy;
     }
     Configuration.getTrustProxy = getTrustProxy;
+    function getSecretSessionKey() {
+        return config.secretSessionKey;
+    }
+    Configuration.getSecretSessionKey = getSecretSessionKey;
 })(Configuration || (Configuration = {}));
 exports.__esModule = true;
 exports["default"] = Configuration;

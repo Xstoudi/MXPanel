@@ -18,6 +18,7 @@ namespace Configuration{
 		httpPort: number,
 		panelPassword: string,
 		trustProxy: number,
+		secretSessionKey: string,
 	}
 
 	let defaultConfig: IConfiguration = {
@@ -28,6 +29,7 @@ namespace Configuration{
 		httpPort: 3000,
 		panelPassword: "PoneyMagique",
 		trustProxy: 2
+		secretSessionKey: "PoneyMagiqueSurRoulettesChromees"
 	}
 
 	let config: IConfiguration = undefined;
@@ -84,6 +86,9 @@ namespace Configuration{
 	}
 	export function getTrustProxy(){
 		return config.trustProxy;
+	}
+	export function getSecretSessionKey(){
+		return config.secretSessionKey;
 	}
 }
 export default Configuration;
