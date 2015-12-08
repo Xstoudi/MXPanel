@@ -28,7 +28,7 @@ namespace Configuration{
 		sqlDatabase: "hermes",
 		httpPort: 3000,
 		panelPassword: "PoneyMagique",
-		trustProxy: 2
+		trustProxy: 2,
 		secretSessionKey: "PoneyMagiqueSurRoulettesChromees"
 	}
 
