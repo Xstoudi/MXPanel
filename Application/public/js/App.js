@@ -74,6 +74,7 @@ ngApp.config(function ($routeProvider) {
     $scope.refreshStatus = function () {
         var refreshing = [true, true];
         document.querySelector("#refreshSpin").className += " fa-spin";
+        // Postfix
         $.ajax({
             type: "get",
             url: "/server/postfix",
@@ -87,6 +88,7 @@ ngApp.config(function ($routeProvider) {
                 setTimeout(update, 950);
             }
         });
+        // Dovecot
         $.ajax({
             type: "get",
             url: "/server/dovecot",
@@ -182,7 +184,8 @@ ngApp.config(function ($routeProvider) {
             success: function (data, textStatus, jqXHR) {
                 document.querySelector("#errorText").innerHTML = "&nbsp;&nbsp;&nbsp;" + data.message;
                 document.querySelector("#errorAddingUser").style.display = "block";
-                location.reload(true);
+                if (data.message.indexOf("created") != -1)
+                    location.reload(true);
             }
         });
     };
@@ -236,7 +239,8 @@ ngApp.config(function ($routeProvider) {
             success: function (data, textStatus, jqXHR) {
                 document.querySelector("#errorText").innerHTML = "&nbsp;&nbsp;&nbsp;" + data.message;
                 document.querySelector("#errorAddingDomain").style.display = "block";
-                location.reload(true);
+                if (data.message.indexOf("created") != -1)
+                    location.reload(true);
             }
         });
     };
@@ -256,6 +260,61 @@ ngApp.config(function ($routeProvider) {
                 $templateCache.remove(currentPageTemplate);
                 $location.path("/login").replace();
                 $scope.$apply();
+            }
+        });
+    };
+})
+    .controller("aliasesController", function ($scope, $templateCache, $route, $location) {
+    $templateCache.removeAll();
+    $scope.logout = function () {
+        $.ajax({
+            type: "post",
+            url: "/logout",
+            dataType: "json",
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log("Error ! " + textStatus);
+            },
+            success: function (data, textStatus, jqXHR) {
+                var currentPageTemplate = $route.current.templateUrl;
+                $templateCache.remove(currentPageTemplate);
+                $location.path("/login").replace();
+                $scope.$apply();
+            }
+        });
+    };
+    $scope.deleteAlias = function (id) {
+        $.ajax({
+            type: "delete",
+            url: "/aliases/delete/" + id,
+            dataType: "json",
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log("Error ! " + errorThrown);
+            },
+            success: function (data, textStatus, jqXHR) {
+                var toRemove = document.querySelector("#alias-" + id);
+                toRemove.parentNode.removeChild(toRemove);
+            }
+        });
+    };
+    $scope.hideError = function () {
+        document.querySelector("#errorAddingAlias").style.display = "none";
+    };
+    $scope.createAlias = function () {
+        var alias = document.querySelector("#new-alias-input input").value;
+        var destination = document.querySelector("#new-destination-input input").value;
+        $.ajax({
+            type: "post",
+            url: "/aliases/create",
+            dataType: "json",
+            data: { alias: alias, destination: destination },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log("Error ! " + errorThrown);
+            },
+            success: function (data, textStatus, jqXHR) {
+                document.querySelector("#errorText").innerHTML = "&nbsp;&nbsp;&nbsp;" + data.message;
+                document.querySelector("#errorAddingAlias").style.display = "block";
+                if (data.message.indexOf("created") != -1)
+                    location.reload(true);
             }
         });
     };

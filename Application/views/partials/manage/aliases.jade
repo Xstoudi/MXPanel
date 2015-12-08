@@ -1,4 +1,4 @@
-div()
+div(ng-controller="aliasesController")
     header
         nav(class="navbar navbar-default navbar-inverse navbar-fixed-top")
             div(class="container")
@@ -6,13 +6,13 @@ div()
                     li
                         a(href="#/overview") Overview
                     li
-                        a(href="#/users") Users management
+                        a(href="#/users") Users
                     li
-                        a(href="#/domains") Domains management
-                    li
-                        a(href="#/logs") Logs
+                        a(href="#/domains") Domains
                     li(class="active")
                         a(href="#/aliases") Aliases
+                    li
+                        a(href="#/logs") Logs
                     div(id="logout-button")
                         button(class="btn btn-danger" ng-click="logout();") Logout
     div(class="panel panel-default" id="aliases-list")
@@ -25,38 +25,27 @@ div()
                     th Email
                     th
             tbody
-                tr
-                    td coucou@idleweiss.ch
-                    td zafix@idleweiss.ch
-                    td
-                        button(class="btn btn-danger")
-                            i(class="fa fa-trash")
-                tr
-                    td coucou@idleweiss.ch
-                    td zafix@idleweiss.ch
-                    td
-                        button(class="btn btn-danger")
-                            i(class="fa fa-trash")
-                tr
-                    td coucou@idleweiss.ch
-                    td zafix@idleweiss.ch
-                    td
-                        button(class="btn btn-danger")
-                            i(class="fa fa-trash")
-        
-        
-
+                - for(var i = 0; i < aliases.length; ++i){
+                    tr(id!="alias-" + aliases[i].id)
+                        td= aliases[i].source
+                        td= aliases[i].destination
+                        td
+                            button(class="btn btn-danger" ng-click!="deleteAlias(" + aliases[i].id + ")")
+                                i(class="fa fa-trash")
+                - }
+              
     div(id="aliases-btn-control")
         h2 Add an alias
-        div(id="errorAddingUser" ng-click="hideError();" class="alert alert-warning alert-dismissible" role="alert" style="display: none;")
+        div(id="errorAddingAlias" ng-click="hideError();" class="alert alert-warning alert-dismissible" role="alert" style="display: none;")
             button(type="button" class="alert close" aria-label="Close")
                 span(aria-hidden="true") &times;
             strong Warning!
             span(id="errorText")
-        div(class="input-group" id="email")
-            input(type="text" class="form-control" placeholder="Email")
         div(class="input-group" id="alias")
-            input(type="text" class="form-control" placeholder="Alias")
+            div(class="input-group" id="new-alias-input")
+                input(type="text" class="form-control" placeholder="Alias")
+            div(class="input-group" id="new-destination-input")
+                input(type="text" class="form-control" placeholder="Destination")
         
-        button(class="btn btn-success") Add
+        button(class="btn btn-success" ng-click="createAlias();") Add
       

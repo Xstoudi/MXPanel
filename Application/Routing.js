@@ -1,4 +1,3 @@
-"use strict";
 var Logger_1 = require("./Logger");
 var Database_1 = require("./Database");
 var Configuration_1 = require("./Configuration");
@@ -65,6 +64,7 @@ var Routing;
                 res.status(403).send({ please: "go hell" });
         }
         Server.get = get;
+        // Post command (start, reboot, stop)
         function post(req, res) {
             if (req.session.logged && (req.params.server == "dovecot" || req.params.server == "postfix")) {
                 switch (req.params.command) {
@@ -219,11 +219,43 @@ var Routing;
     (function (Aliases) {
         function get(req, res) {
             if (req.session.logged)
-                res.render("partials/manage/aliases");
+                Database_1["default"].getAliases(function (aliases) {
+                    Database_1["default"].getUsers(function (users) {
+                        res.render("partials/manage/aliases", { aliases: aliases, users: users });
+                    });
+                });
             else
                 res.render("partials/login");
         }
         Aliases.get = get;
+        function _delete(req, res) {
+            if (req.session.logged) {
+                Database_1["default"].deleteAlias(req.params.id, function () {
+                    Logger_1["default"].log(req.ip + " deleted alias N\u00B0" + req.params.id);
+                    res.status(200).send({});
+                });
+            }
+            else
+                res.render("partials/login");
+        }
+        Aliases._delete = _delete;
+        function post(req, res) {
+            if (req.session.logged) {
+                var alias = req.body.alias;
+                var destination = req.body.destination;
+                if (alias != undefined && destination != undefined) {
+                    Database_1["default"].createAlias(alias, destination, function (message) {
+                        res.status(200).send({ message: message });
+                        Logger_1["default"].log(req.ip + " created alias \"" + alias + "\" for \"" + destination + "\" ");
+                    });
+                }
+                else
+                    res.status(200).send({ message: "Please type an alias" });
+            }
+            else
+                res.render("partials/login");
+        }
+        Aliases.post = post;
     })(Aliases = Routing.Aliases || (Routing.Aliases = {}));
 })(Routing = exports.Routing || (exports.Routing = {}));
 exports.__esModule = true;

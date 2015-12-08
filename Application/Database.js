@@ -14,7 +14,7 @@ var Database;
     }
     Database.loadDatabaseInfo = loadDatabaseInfo;
     /*
-        User relative
+        Users relative
     */
     function getUsers(callback) {
         Database.sqlServer.query("SELECT id, email FROM virtual_users", function (err, rows, fields) {
@@ -71,9 +71,10 @@ var Database;
     }
     Database.createUser = createUser;
     /*
-        Domain relative
+        Domains relative
     */
     function getDomain(identifier, callback) {
+        console.log(identifier);
         Database.sqlServer.query("SELECT " + (typeof identifier === "string" ? "id" : "name") + " FROM virtual_domains WHERE " + (typeof identifier === "string" ? "name" : "id") + "=? LIMIT 1", [identifier], function (err, rows, fields) {
             if (!Logger_1["default"].err(err)) {
                 callback(rows[0].id);
@@ -125,6 +126,51 @@ var Database;
         });
     }
     Database.createDomain = createDomain;
+    /*
+        Aliases relative
+    */
+    function getAliases(callback) {
+        Database.sqlServer.query("SELECT * FROM virtual_aliases", function (err, rows, fields) {
+            if (!Logger_1["default"].err(err)) {
+                callback(rows);
+            }
+        });
+    }
+    Database.getAliases = getAliases;
+    function deleteAlias(id, callback) {
+        Database.sqlServer.query("DELETE FROM virtual_aliases WHERE id=?", [id], function (err, rows, fields) {
+            if (!Logger_1["default"].err(err)) {
+                callback();
+            }
+        });
+    }
+    Database.deleteAlias = deleteAlias;
+    function createAlias(alias, destination, callback) {
+        Database.existsAlias(alias, destination, function (existsAlias) {
+            if (existsAlias) {
+                callback("Alias already exists...");
+                return;
+            }
+            var domain = alias.split("@")[1];
+            Database.getDomain(domain, function (identifier) {
+                Database.sqlServer.query("INSERT INTO virtual_aliases (domain_id, source, destination) VALUES (?,?,?)", [identifier, alias, destination], function (err, rows, fields) {
+                    if (!Logger_1["default"].err(err)) {
+                        callback("Alias created");
+                    }
+                });
+            });
+        });
+    }
+    Database.createAlias = createAlias;
+    ;
+    function existsAlias(alias, destination, callback) {
+        Database.sqlServer.query("SELECT id FROM virtual_aliases WHERE source=? AND destination=?", [alias, destination], function (err, rows, fields) {
+            if (!Logger_1["default"].err(err)) {
+                callback(rows.length > 0);
+            }
+        });
+    }
+    Database.existsAlias = existsAlias;
 })(Database = exports.Database || (exports.Database = {}));
 exports.__esModule = true;
 exports["default"] = Database;

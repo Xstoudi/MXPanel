@@ -65,6 +65,8 @@ function appMain(){
 	httpServer.post("/domains/create", Routing.Domains.post);
 
 	httpServer.get("/aliases", Routing.Aliases.get);
+	httpServer.delete("/aliases/delete/:id", Routing.Aliases._delete);
+	httpServer.post("/aliases/create", Routing.Aliases.post);
 
 	httpServer.listen(Configuration.getHttpPort(), () => {
 		Logger.log(`Listen for HTTP requests on ${Configuration.getHttpPort()}`)

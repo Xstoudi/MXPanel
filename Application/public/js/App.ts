@@ -192,7 +192,7 @@ ngApp.config(($routeProvider) => {
 			success: (data: any, textStatus: string, jqXHR: JQueryXHR) => {
 				(<HTMLElement>document.querySelector("#errorText")).innerHTML = `&nbsp;&nbsp;&nbsp;${data.message}`;
 				(<HTMLElement>document.querySelector("#errorAddingUser")).style.display = "block";
-				location.reload(true);
+				if(data.message.indexOf("created") != -1) location.reload(true);
 			}
 		});
 	}
@@ -249,7 +249,7 @@ ngApp.config(($routeProvider) => {
 			success: (data: any, textStatus: string, jqXHR: JQueryXHR) => {
 				(<HTMLElement>document.querySelector("#errorText")).innerHTML = `&nbsp;&nbsp;&nbsp;${data.message}`;
 				(<HTMLElement>document.querySelector("#errorAddingDomain")).style.display = "block";
-				location.reload(true);
+				if(data.message.indexOf("created") != -1) location.reload(true);
 			}
 		});
 	}
@@ -275,3 +275,62 @@ ngApp.config(($routeProvider) => {
 		});
 	}
 })
+.controller("aliasesController", ($scope, $templateCache, $route, $location) => {
+	$templateCache.removeAll();
+
+	$scope.logout = () => {
+		$.ajax({
+			type: "post",
+			url: "/logout",
+			dataType: "json",
+			error: (jqXHR: JQueryXHR, textStatus: string, errorThrown: string) => {
+				console.log("Error ! " + textStatus);
+			},
+			success: (data: any, textStatus: string, jqXHR: JQueryXHR) => {
+				let currentPageTemplate = $route.current.templateUrl;
+				$templateCache.remove(currentPageTemplate);
+				$location.path("/login").replace();
+				$scope.$apply();
+			}
+		});
+	}
+
+	$scope.deleteAlias = (id: number) => {
+		$.ajax({
+			type: "delete",
+			url: `/aliases/delete/${id}`,
+			dataType: "json",
+			error: (jqXHR: JQueryXHR, textStatus: string, errorThrown: string) => {
+				console.log("Error ! " + errorThrown);
+			},
+			success: (data: any, textStatus: string, jqXHR: JQueryXHR) => {
+				let toRemove = document.querySelector(`#alias-${id}`);
+				toRemove.parentNode.removeChild(toRemove);
+			}
+		});
+	}
+
+	$scope.hideError = () => {
+		(<HTMLElement>document.querySelector("#errorAddingAlias")).style.display = "none";
+	}
+
+	$scope.createAlias = () => {
+		let alias = (<HTMLInputElement>document.querySelector("#new-alias-input input")).value;
+		let destination = (<HTMLInputElement>document.querySelector("#new-destination-input input")).value;
+
+		$.ajax({
+			type: "post",
+			url: `/aliases/create`,
+			dataType: "json",
+			data: {alias: alias, destination: destination},
+			error: (jqXHR: JQueryXHR, textStatus: string, errorThrown: string) => {
+				console.log("Error ! " + errorThrown);
+			},
+			success: (data: any, textStatus: string, jqXHR: JQueryXHR) => {
+				(<HTMLElement>document.querySelector("#errorText")).innerHTML = `&nbsp;&nbsp;&nbsp;${data.message}`;
+				(<HTMLElement>document.querySelector("#errorAddingAlias")).style.display = "block";
+				if(data.message.indexOf("created") != -1) location.reload(true);
+			}
+		});
+	}
+});

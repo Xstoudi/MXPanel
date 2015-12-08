@@ -191,8 +191,35 @@ export namespace Routing{
 	export namespace Aliases{
 		export function get(req: express.Request, res: express.Response){
 			if((<any>req.session).logged)
-				res.render("partials/manage/aliases");
+				Database.getAliases((aliases) => {
+					Database.getUsers((users) => {
+						res.render("partials/manage/aliases", {aliases: aliases, users: users});
+					}
+				});
 			else
+				res.render("partials/login");
+		}
+		export function _delete(req: express.Request, res: express.Response){
+			if((<any>req.session).logged) {
+				Database.deleteAlias(req.params.id, () => {
+					Logger.log(`${req.ip} deleted alias N°${req.params.id}`);
+					res.status(200).send({});
+				});
+			}else
+				res.render("partials/login");
+		}
+		export function post(req: express.Request, res: express.Response){
+			if((<any>req.session).logged) {
+				let alias = req.body.alias;
+				let destination = req.body.destination;
+				if(alias != undefined && destination != undefined){
+					Database.createAlias(alias, destination, (message: string) => {
+						res.status(200).send({message: message});
+						Logger.log(`${req.ip} created alias "${alias}" for "${destination}" `);
+					})
+				}else
+					res.status(200).send({message: "Please type an alias"})
+			}else
 				res.render("partials/login");
 		}
 	}
