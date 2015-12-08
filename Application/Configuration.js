@@ -11,7 +11,8 @@ var Configuration;
         sqlPass: "",
         sqlDatabase: "hermes",
         httpPort: 3000,
-        panelPassword: "PoneyMagique"
+        panelPassword: "PoneyMagique",
+        trustProxy: 2
     };
     var config = undefined;
     function loadConfiguration() {
@@ -68,6 +69,10 @@ var Configuration;
         return config.panelPassword;
     }
     Configuration.getPanelPassword = getPanelPassword;
+    function getTrustProxy() {
+        return config.trustProxy;
+    }
+    Configuration.getTrustProxy = getTrustProxy;
 })(Configuration || (Configuration = {}));
 exports.__esModule = true;
 exports["default"] = Configuration;

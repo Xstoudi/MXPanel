@@ -16,7 +16,8 @@ namespace Configuration{
 		sqlPass: string,
 		sqlDatabase: string,
 		httpPort: number,
-		panelPassword: string
+		panelPassword: string,
+		trustProxy: number,
 	}
 
 	let defaultConfig: IConfiguration = {
@@ -25,7 +26,8 @@ namespace Configuration{
 		sqlPass: "",
 		sqlDatabase: "hermes",
 		httpPort: 3000,
-		panelPassword: "PoneyMagique"
+		panelPassword: "PoneyMagique",
+		trustProxy: 2
 	}
 
 	let config: IConfiguration = undefined;
@@ -79,6 +81,9 @@ namespace Configuration{
 	}
 	export function getPanelPassword(){
 		return config.panelPassword;
+	}
+	export function getTrustProxy(){
+		return config.trustProxy;
 	}
 }
 export default Configuration;

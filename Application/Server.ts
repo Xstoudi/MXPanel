@@ -30,7 +30,7 @@ function appMain(){
 	httpServer.set("views", path.join(__dirname, "views"));
   	httpServer.use(express.static(path.join(__dirname, "public")));
   	httpServer.set("view engine", "jade");
-  	httpServer.set('trust proxy', 1);
+  	httpServer.set("trust proxy", Configuration.getTrustProxy());
 
 	httpServer.use(cookieParser);
 	httpServer.use(session({
