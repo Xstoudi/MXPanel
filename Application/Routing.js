@@ -270,6 +270,7 @@ var Routing;
             var newPasswordConf = req.body.newPasswordConf;
             Database_1["default"].existsUserWithPassword(email, oldPassword, function (exists) {
                 if (!exists) {
+                    console.log(exists);
                     res.status(200).send({ message: "Email/password invalid" });
                     return;
                 }
@@ -281,7 +282,6 @@ var Routing;
                     res.status(200).send({ message: message });
                 });
             });
-            console.log(email + " " + oldPassword + " " + newPassword + " " + newPasswordConf);
         }
         ChangePassword.post = post;
     })(ChangePassword = Routing.ChangePassword || (Routing.ChangePassword = {}));

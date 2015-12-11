@@ -235,6 +235,7 @@ export namespace Routing{
 			
 			Database.existsUserWithPassword(email, oldPassword, (exists) => {
 				if(!exists){
+					console.log(exists);
 					res.status(200).send({message: "Email/password invalid"});
 					return;
 				}
@@ -246,8 +247,6 @@ export namespace Routing{
 					res.status(200).send({message: message});
 				});
 			});
-			
-			console.log(email + " " + oldPassword + " " + newPassword + " " + newPasswordConf);
 		}
 	}
 }
