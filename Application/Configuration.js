@@ -10,6 +10,7 @@ var Configuration;
         sqlUser: "root",
         sqlPass: "",
         sqlDatabase: "hermes",
+        sqlSalt: "WeLovePoneys",
         httpPort: 3000,
         panelPassword: "PoneyMagique",
         trustProxy: 2,
@@ -62,6 +63,10 @@ var Configuration;
         return config.sqlDatabase;
     }
     Configuration.getSqlDatabase = getSqlDatabase;
+    function getSqlSalt() {
+        return config.sqlSalt;
+    }
+    Configuration.getSqlSalt = getSqlSalt;
     function getHttpPort() {
         return config.httpPort;
     }

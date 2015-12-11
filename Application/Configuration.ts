@@ -15,6 +15,7 @@ namespace Configuration{
 		sqlUser: string,
 		sqlPass: string,
 		sqlDatabase: string,
+		sqlSalt: string,
 		httpPort: number,
 		panelPassword: string,
 		trustProxy: number,
@@ -26,6 +27,7 @@ namespace Configuration{
 		sqlUser: "root",
 		sqlPass: "",
 		sqlDatabase: "hermes",
+		sqlSalt: "WeLovePoneys",
 		httpPort: 3000,
 		panelPassword: "PoneyMagique",
 		trustProxy: 2,
@@ -77,6 +79,9 @@ namespace Configuration{
 	}
 	export function getSqlDatabase(){
 		return config.sqlDatabase;
+	}
+	export function getSqlSalt(){
+		return config.sqlSalt;
 	}
 	export function getHttpPort(){
 		return config.httpPort;
