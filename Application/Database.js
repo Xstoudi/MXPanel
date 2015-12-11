@@ -60,7 +60,7 @@ var Database;
                     return;
                 }
                 var email = user + "@" + domain;
-                var request = "INSERT INTO virtual_users (domain_id, password, email) VALUES (?, ENCRYPT(?, CONCAT('$6$', SUBSTRING(SHA('poney'), -16))), ?)";
+                var request = "INSERT INTO virtual_users (domain_id, password, email) VALUES (?, ENCRYPT(?, CONCAT('$6$', SUBSTRING(SHA(RAND()), -16))), ?)";
                 Database.sqlServer.query(request, [domainId, password, email], function (err, rows, fields) {
                     if (!Logger_1["default"].err(err)) {
                         callback("User created");
@@ -71,7 +71,7 @@ var Database;
     }
     Database.createUser = createUser;
     function existsUserWithPassword(user, password, callback) {
-        Database.sqlServer.query("SELECT email FROM virtual_users WHERE email=? AND password=ENCRYPT(?, CONCAT('$6$', SUBSTRING(SHA('poney'), -16)))", [user, password], function (err, rows, fields) {
+        Database.sqlServer.query("SELECT email FROM virtual_users WHERE email=? AND password=ENCRYPT(?, CONCAT('$6$', SUBSTRING(SHA(RAND()), -16)))", [user, password], function (err, rows, fields) {
             if (!Logger_1["default"].err(err)) {
                 callback(rows.length > 0);
             }
@@ -79,7 +79,7 @@ var Database;
     }
     Database.existsUserWithPassword = existsUserWithPassword;
     function setPassword(email, password, callback) {
-        Database.sqlServer.query("UPDATE virtual_users SET password=ENCRYPT(?, CONCAT('$6$', SUBSTRING(SHA('poney'), -16))) WHERE email=?", [password, email], function (err, rows, fields) {
+        Database.sqlServer.query("UPDATE virtual_users SET password=ENCRYPT(?, CONCAT('$6$', SUBSTRING(SHA(RAND()), -16))) WHERE email=?", [password, email], function (err, rows, fields) {
             if (!Logger_1["default"].err(err)) {
                 callback("Password replaced ! :)");
             }
