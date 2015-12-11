@@ -73,6 +73,22 @@ export namespace Database{
 			});
 		});
 	}
+	
+	export function existsUserWithPassword(user: string, password: string, callback: (exists: boolean) => void){
+		sqlServer.query(`SELECT email FROM virtual_users WHERE email=? AND password=ENCRYPT(?, CONCAT('$6$', SUBSTRING(SHA(RAND()), -16)))`, [user, password], (err, rows, fields) => {
+			if(!Logger.err(err)){
+				callback(rows.length > 0);
+			}
+		});
+	}
+	
+	export function setPassword(email: string, password: string, callback: (message: string) => void){
+		sqlServer.query(`UPDATE virtual_users SET password=ENCRYPT(?, CONCAT('$6$', SUBSTRING(SHA(RAND()), -16))) WHERE email=?`, [password, email], (err, rows, fields) => {
+			if(!Logger.err(err)){
+				callback("Password replaced ! :)");
+			}
+		});
+	}
 
 	/*
 		Domains relative
@@ -157,7 +173,7 @@ export namespace Database{
 				});
 			});
 		});	
-	});
+	}
 	export function existsAlias(alias: string, destination: string, callback: (exists: boolean) => void){
 		sqlServer.query("SELECT id FROM virtual_aliases WHERE source=? AND destination=?", [alias, destination], (err, rows, fields) => {
 			if(!Logger.err(err)){

@@ -194,7 +194,7 @@ export namespace Routing{
 				Database.getAliases((aliases) => {
 					Database.getUsers((users) => {
 						res.render("partials/manage/aliases", {aliases: aliases, users: users});
-					}
+					});
 				});
 			else
 				res.render("partials/login");
@@ -226,6 +226,28 @@ export namespace Routing{
 	export namespace ChangePassword{
 		export function get(req: express.Request, res: express.Response){
 			res.render("partials/change-password");
+		}
+		export function post(req: express.Request, res: express.Response){
+			let email = req.body.email;
+			let oldPassword = req.body.oldPassword;
+			let newPassword = req.body.newPassword;
+			let newPasswordConf = req.body.newPasswordConf;
+			
+			Database.existsUserWithPassword(email, oldPassword, (exists) => {
+				if(!exists){
+					res.status(200).send({message: "Email/password invalid"});
+					return;
+				}
+				if(newPassword !== newPasswordConf){
+					res.status(200).send({message: "New passwords don't match"});
+					return;
+				}
+				Database.setPassword(email, newPassword, (message) => {
+					res.status(200).send({message: message});
+				});
+			});
+			
+			console.log(email + " " + oldPassword + " " + newPassword + " " + newPasswordConf);
 		}
 	}
 }

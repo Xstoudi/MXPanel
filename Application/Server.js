@@ -50,6 +50,7 @@ function appMain() {
     httpServer.delete("/aliases/delete/:id", Routing_1["default"].Aliases._delete);
     httpServer.post("/aliases/create", Routing_1["default"].Aliases.post);
     httpServer.get("/change-password", Routing_1["default"].ChangePassword.get);
+    httpServer.post("/change-password", Routing_1["default"].ChangePassword.post);
     httpServer.listen(Configuration_1["default"].getHttpPort(), function () {
         Logger_1["default"].log("Listen for HTTP requests on " + Configuration_1["default"].getHttpPort());
     });

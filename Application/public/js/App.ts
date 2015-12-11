@@ -336,4 +336,21 @@ ngApp.config(($routeProvider) => {
 			}
 		});
 	}
-});
+})
+.controller("changePasswordController", ($scope, $templateCache, $route, $location) => {
+	$scope.changePassword = () => {
+		$.ajax({
+			type: "post",
+			url: `/change-password`,
+			dataType: "json",
+			data: {email: $scope.email, oldPassword: $scope.oldPassword, newPassword: $scope.newPassword, newPasswordConf: $scope.newPasswordConf},
+			error: (jqXHR: JQueryXHR, textStatus: string, errorThrown: string) => {
+				console.log("Error ! " + errorThrown);
+			},
+			success: (data: any, textStatus: string, jqXHR: JQueryXHR) => {
+				(<HTMLElement>document.querySelector("#errorText")).innerHTML = `&nbsp;&nbsp;&nbsp;${data.message}`;
+				(<HTMLElement>document.querySelector("#errorChangingPassword")).style.display = "block";
+			}
+		});
+	} 
+})

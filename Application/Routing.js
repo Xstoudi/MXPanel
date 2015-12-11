@@ -263,6 +263,27 @@ var Routing;
             res.render("partials/change-password");
         }
         ChangePassword.get = get;
+        function post(req, res) {
+            var email = req.body.email;
+            var oldPassword = req.body.oldPassword;
+            var newPassword = req.body.newPassword;
+            var newPasswordConf = req.body.newPasswordConf;
+            Database_1["default"].existsUserWithPassword(email, oldPassword, function (exists) {
+                if (!exists) {
+                    res.status(200).send({ message: "Email/password invalid" });
+                    return;
+                }
+                if (newPassword !== newPasswordConf) {
+                    res.status(200).send({ message: "New passwords don't match" });
+                    return;
+                }
+                Database_1["default"].setPassword(email, newPassword, function (message) {
+                    res.status(200).send({ message: message });
+                });
+            });
+            console.log(email + " " + oldPassword + " " + newPassword + " " + newPasswordConf);
+        }
+        ChangePassword.post = post;
     })(ChangePassword = Routing.ChangePassword || (Routing.ChangePassword = {}));
 })(Routing = exports.Routing || (exports.Routing = {}));
 exports.__esModule = true;
