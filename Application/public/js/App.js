@@ -24,7 +24,7 @@ ngApp.config(function ($routeProvider) {
     })
         .otherwise("/login");
 })
-    .controller("loginController", function ($scope, $location, $window) {
+    .controller("loginController", function ($scope, $location, $window, $rootScope) {
     $scope.hideBadPassword = function () {
         document.querySelector("#badPasswordAlert").style.display = "none";
     };
@@ -337,5 +337,10 @@ ngApp.config(function ($routeProvider) {
                 document.querySelector("#errorChangingPassword").style.display = "block";
             }
         });
+    };
+})
+    .controller("footerController", function ($scope) {
+    $scope.makeCoffee = function () {
+        window.open("/img/coffee.jpg", "MsgWindow", "width=800, height=800");
     };
 });

@@ -24,7 +24,7 @@ ngApp.config(($routeProvider) => {
 		})
 		.otherwise("/login");
 })
-.controller("loginController", ($scope, $location, $window) => {
+.controller("loginController", ($scope, $location, $window, $rootScope) => {
 	$scope.hideBadPassword = () => {
 		(<HTMLElement>document.querySelector("#badPasswordAlert")).style.display = "none";
 	}
@@ -353,4 +353,9 @@ ngApp.config(($routeProvider) => {
 			}
 		});
 	} 
+})
+.controller("footerController", ($scope) => {
+	$scope.makeCoffee = () => {
+		window.open("/img/coffee.jpg", "MsgWindow", "width=800, height=800");
+	}
 })

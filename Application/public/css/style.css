@@ -239,3 +239,6 @@ footer .text-container p{
 .red{
     color: red;
 }
+.coffeeMaker{
+    cursor: pointer;
+}

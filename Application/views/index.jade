@@ -16,7 +16,7 @@ html(lang="fr" ng-app="mxpanel")
         script(src="/js/App.js")
     body                                         
         div(ng-view)
-        footer
+        footer(ng-controller="footerController")
             div(class="text-container")
                 p
                     | Made with 
@@ -25,3 +25,5 @@ html(lang="fr" ng-app="mxpanel")
                     a(href="http://github.com/Xstoudi") Xavier Stouder 
                     | and 
                     a(href="http://github.com/ZafixLRP") Luca Laissue 
+                    | |  
+                    a(ng-click="makeCoffee()" class="coffeeMaker") Coffee plz
