@@ -4,7 +4,20 @@
   "description": "",
   "main": "Application/Server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "tsd install angularjs && tsd install body-parser && tsd install cookie-parser && tsd install express && tsd install express-session && tsd install jquery && tsd install mime && tsd install mysql && tsd install node && tsd install serve-static && tsc"
+  },
+  "dependencies" : {
+    "ansicolors" : "^0.3.2",
+    "body-parser": "^1.14.1",
+    "cookie-parser": "^1.4.0",
+    "express": "^4.13.3",
+    "express-session": "^1.12.1",
+    "jade": "^1.11.0",
+    "mysql": "^2.9.0",
+    "simple-json-formatter": "^1.0.2",
+    "typescript": "*",
+    "tsd": "*"
   },
   "repository": {
     "type": "git",

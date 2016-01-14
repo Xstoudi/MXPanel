@@ -21,8 +21,11 @@ A basic web panel to manage Postfix/Dovecot/MySQL installation.
 * NodeJS
 
 ## Install
+    $ git clone https://github.com/Xstoudi/MXPanel.git
+    $ cd MXPanel
+    $ npm install
 * Start the server with `node Application/Server.js`
-* Edit configurations on `config.json` 
+* Edit configurations on `config.json`
 * Restart server
 * Open your web browser and go on `host:port`
 * Enjoy 
