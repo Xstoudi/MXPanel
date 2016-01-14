@@ -11,7 +11,7 @@ A basic web panel to manage Postfix/Dovecot/MySQL installation.
 
 ## Contributors
 * Luca Laissue <luca.laissue@divtec.ch> : UI / UX designer
-* Xavier Stouder <xavier@stouder.io> :  Developer
+* Xavier Stouder <xavier.stouder@divtec.ch> :  Developer
 
 ## Requirements
 * Postfix server configured
