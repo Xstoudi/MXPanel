@@ -1,3 +1,5 @@
+> LEGACY CODE : DON'T USE
+
 # MXPanel
 ## Description
 A basic web panel to manage Postfix/Dovecot/MySQL installation.
